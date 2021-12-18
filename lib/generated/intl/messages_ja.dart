@@ -25,11 +25,16 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accountConfirm": MessageLookupByLibrary.simpleMessage("アカウントがありません?"),
+        "act": MessageLookupByLibrary.simpleMessage("アクション"),
+        "adv": MessageLookupByLibrary.simpleMessage("アドベンチャー"),
         "confirmPassword": MessageLookupByLibrary.simpleMessage("パスワード確認"),
         "dark": MessageLookupByLibrary.simpleMessage("ダーク"),
         "darkDescription": MessageLookupByLibrary.simpleMessage("黒を基調とした暗いテーマ"),
         "email": MessageLookupByLibrary.simpleMessage("メールアドレス"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("パスワードを忘れた?"),
+        "fps": MessageLookupByLibrary.simpleMessage("ファーストパーソン・シューティングゲーム"),
+        "ftg": MessageLookupByLibrary.simpleMessage("対戦型格闘"),
+        "genre": MessageLookupByLibrary.simpleMessage("ジャンル"),
         "invalidEmail": MessageLookupByLibrary.simpleMessage("無効なメールアドレス"),
         "language": MessageLookupByLibrary.simpleMessage("言語"),
         "light": MessageLookupByLibrary.simpleMessage("ライト"),
@@ -50,13 +55,22 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("1つの記号を含む必要があります"),
         "passwordUppercase":
             MessageLookupByLibrary.simpleMessage("1つの英大文字を含む必要があります"),
+        "platform": MessageLookupByLibrary.simpleMessage("プラットフォーム"),
+        "pzl": MessageLookupByLibrary.simpleMessage("パズル"),
+        "rcg": MessageLookupByLibrary.simpleMessage("レース"),
         "register": MessageLookupByLibrary.simpleMessage("登録"),
         "required": m0,
         "resetPassword": MessageLookupByLibrary.simpleMessage("パスワード再設定"),
+        "rpg": MessageLookupByLibrary.simpleMessage("ロールプレイング"),
+        "searchFilter": MessageLookupByLibrary.simpleMessage("検索フィルター"),
         "settings": MessageLookupByLibrary.simpleMessage("設定"),
+        "slg": MessageLookupByLibrary.simpleMessage("シミュレーション"),
+        "spg": MessageLookupByLibrary.simpleMessage("スポーツ"),
+        "stg": MessageLookupByLibrary.simpleMessage("シューティング"),
         "system": MessageLookupByLibrary.simpleMessage("システム"),
         "systemDescription":
             MessageLookupByLibrary.simpleMessage("端末のシステム設定に追従"),
-        "theme": MessageLookupByLibrary.simpleMessage("テーマ")
+        "theme": MessageLookupByLibrary.simpleMessage("テーマ"),
+        "tps": MessageLookupByLibrary.simpleMessage("サードパーソン・シューティング")
       };
 }

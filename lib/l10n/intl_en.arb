@@ -26,5 +26,19 @@
   "dark": "Dark",
   "systemDescription": "Follow the system settings",
   "lightDescription": "Light theme based on white",
-  "darkDescription": "Dark theme based on black"
+  "darkDescription": "Dark theme based on black",
+  "searchFilter": "Search filter",
+  "platform": "Platform",
+  "act": "Action",
+  "adv": "Adventure",
+  "fps": "First-person shooter",
+  "ftg": "Fighting",
+  "pzl": "Puzzle",
+  "rcg": "Racing",
+  "rpg": "Role-playing",
+  "slg": "Simulation",
+  "spg": "Sports",
+  "stg": "Shooter",
+  "tps": "Third-person shooter",
+  "genre": "Genre"
 }

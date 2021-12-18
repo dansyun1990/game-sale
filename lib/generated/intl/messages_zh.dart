@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accountConfirm": MessageLookupByLibrary.simpleMessage("没有账号?"),
+        "act": MessageLookupByLibrary.simpleMessage("动作"),
+        "adv": MessageLookupByLibrary.simpleMessage("冒险"),
         "confirmPassword": MessageLookupByLibrary.simpleMessage("确认密码"),
         "dark": MessageLookupByLibrary.simpleMessage("深色"),
         "darkDescription": MessageLookupByLibrary.simpleMessage("以黑色为主调的深色主题"),
@@ -32,6 +34,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgotPassword": MessageLookupByLibrary.simpleMessage("忘记密码?"),
         "forgotPasswordMessage":
             MessageLookupByLibrary.simpleMessage("提供您的电子邮件，我们将向您发送一个链接以重置您的密码"),
+        "fps": MessageLookupByLibrary.simpleMessage("第一人称射击"),
+        "ftg": MessageLookupByLibrary.simpleMessage("格斗"),
+        "genre": MessageLookupByLibrary.simpleMessage("类型"),
         "invalidEmail": MessageLookupByLibrary.simpleMessage("无效的邮箱"),
         "language": MessageLookupByLibrary.simpleMessage("语言"),
         "light": MessageLookupByLibrary.simpleMessage("浅色"),
@@ -49,12 +54,21 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("至少得包含1个特殊符号"),
         "passwordUppercase":
             MessageLookupByLibrary.simpleMessage("至少得包含1个大写字母"),
+        "platform": MessageLookupByLibrary.simpleMessage("平台"),
+        "pzl": MessageLookupByLibrary.simpleMessage("解密"),
+        "rcg": MessageLookupByLibrary.simpleMessage("赛车"),
         "register": MessageLookupByLibrary.simpleMessage("注册"),
         "required": m0,
         "resetPassword": MessageLookupByLibrary.simpleMessage("重置密码"),
+        "rpg": MessageLookupByLibrary.simpleMessage("角色扮演"),
+        "searchFilter": MessageLookupByLibrary.simpleMessage("查询过滤"),
         "settings": MessageLookupByLibrary.simpleMessage("设定"),
+        "slg": MessageLookupByLibrary.simpleMessage("模拟"),
+        "spg": MessageLookupByLibrary.simpleMessage("运动"),
+        "stg": MessageLookupByLibrary.simpleMessage("射击"),
         "system": MessageLookupByLibrary.simpleMessage("系统"),
         "systemDescription": MessageLookupByLibrary.simpleMessage("跟随系统的设定"),
-        "theme": MessageLookupByLibrary.simpleMessage("主题")
+        "theme": MessageLookupByLibrary.simpleMessage("主题"),
+        "tps": MessageLookupByLibrary.simpleMessage("第三人称射击")
       };
 }

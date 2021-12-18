@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutterfire_ui/i10n.dart';
+import 'package:game_sale/pages/game/search_filter_page.dart';
 import 'package:game_sale/providers/language_selector_provider.dart';
 import 'package:game_sale/providers/theme_selector_provider.dart';
 import 'package:game_sale/screens/account_screen.dart';
@@ -88,14 +89,19 @@ class MyHomePage extends HookConsumerWidget {
                       Icons.search,
                       color: Colors.grey,
                     ),
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 4.0),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 4.0),
                   ),
                 ),
               ),
               actions: [
                 IconButton(
-                  onPressed: () => {},
+                  onPressed: () => {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute<bool>(
+                            builder: (BuildContext context) =>
+                                SearchFilterPage()))
+                  },
                   icon: const Icon(Icons.filter_alt),
                 )
               ],
