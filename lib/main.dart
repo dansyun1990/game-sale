@@ -74,9 +74,31 @@ class MyHomePage extends HookConsumerWidget {
     return Scaffold(
       appBar: selectIndex.value == 0
           ? AppBar(
-              // Here we take the value from the MyHomePage object that was created by
-              // the App.build method, and use it to set our appbar title.
-              title: Text('ゲームセール'),
+              toolbarHeight: 80.0,
+              title: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    icon: Icon(
+                      Icons.search,
+                      color: Colors.grey,
+                    ),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 4.0),
+                  ),
+                ),
+              ),
+              actions: [
+                IconButton(
+                  onPressed: () => {},
+                  icon: const Icon(Icons.filter_alt),
+                )
+              ],
               bottom: selectIndex.value == 0
                   ? TabBar(
                       controller: tabController,
