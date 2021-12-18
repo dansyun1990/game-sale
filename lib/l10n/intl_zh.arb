@@ -26,5 +26,19 @@
   "dark": "深色",
   "systemDescription": "跟随系统的设定",
   "lightDescription": "以白色为主调的浅色主题",
-  "darkDescription": "以黑色为主调的深色主题"
+  "darkDescription": "以黑色为主调的深色主题",
+  "searchFilter": "查询过滤",
+  "platform": "平台",
+  "act": "动作",
+  "adv": "冒险",
+  "fps": "第一人称射击",
+  "ftg": "格斗",
+  "pzl": "解密",
+  "rcg": "赛车",
+  "rpg": "角色扮演",
+  "slg": "模拟",
+  "spg": "运动",
+  "stg": "射击",
+  "tps": "第三人称射击",
+  "genre": "类型"
 }

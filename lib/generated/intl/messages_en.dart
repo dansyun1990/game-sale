@@ -26,6 +26,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accountConfirm":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
+        "act": MessageLookupByLibrary.simpleMessage("Action"),
+        "adv": MessageLookupByLibrary.simpleMessage("Adventure"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),
@@ -36,6 +38,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Forgot password?"),
         "forgotPasswordMessage": MessageLookupByLibrary.simpleMessage(
             "Provide your email and we will send you a link to reset your password"),
+        "fps": MessageLookupByLibrary.simpleMessage("First-person shooter"),
+        "ftg": MessageLookupByLibrary.simpleMessage("Fighting"),
+        "genre": MessageLookupByLibrary.simpleMessage("Genre"),
         "invalidEmail":
             MessageLookupByLibrary.simpleMessage("Invalid email address"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
@@ -58,13 +63,22 @@ class MessageLookup extends MessageLookupByLibrary {
             "Should contain at least one special character"),
         "passwordUppercase": MessageLookupByLibrary.simpleMessage(
             "Should contain at least one uppercase"),
+        "platform": MessageLookupByLibrary.simpleMessage("Platform"),
+        "pzl": MessageLookupByLibrary.simpleMessage("Puzzle"),
+        "rcg": MessageLookupByLibrary.simpleMessage("Racing"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "required": m0,
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset password"),
+        "rpg": MessageLookupByLibrary.simpleMessage("Role-playing"),
+        "searchFilter": MessageLookupByLibrary.simpleMessage("Search filter"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "slg": MessageLookupByLibrary.simpleMessage("Simulation"),
+        "spg": MessageLookupByLibrary.simpleMessage("Sports"),
+        "stg": MessageLookupByLibrary.simpleMessage("Shooter"),
         "system": MessageLookupByLibrary.simpleMessage("System"),
         "systemDescription":
             MessageLookupByLibrary.simpleMessage("Follow the system settings"),
-        "theme": MessageLookupByLibrary.simpleMessage("Theme")
+        "theme": MessageLookupByLibrary.simpleMessage("Theme"),
+        "tps": MessageLookupByLibrary.simpleMessage("Third-person shooter")
       };
 }

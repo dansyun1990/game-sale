@@ -319,6 +319,146 @@ class S {
       args: [],
     );
   }
+
+  /// `Search filter`
+  String get searchFilter {
+    return Intl.message(
+      'Search filter',
+      name: 'searchFilter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Platform`
+  String get platform {
+    return Intl.message(
+      'Platform',
+      name: 'platform',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Action`
+  String get act {
+    return Intl.message(
+      'Action',
+      name: 'act',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Adventure`
+  String get adv {
+    return Intl.message(
+      'Adventure',
+      name: 'adv',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `First-person shooter`
+  String get fps {
+    return Intl.message(
+      'First-person shooter',
+      name: 'fps',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fighting`
+  String get ftg {
+    return Intl.message(
+      'Fighting',
+      name: 'ftg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Puzzle`
+  String get pzl {
+    return Intl.message(
+      'Puzzle',
+      name: 'pzl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Racing`
+  String get rcg {
+    return Intl.message(
+      'Racing',
+      name: 'rcg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Role-playing`
+  String get rpg {
+    return Intl.message(
+      'Role-playing',
+      name: 'rpg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Simulation`
+  String get slg {
+    return Intl.message(
+      'Simulation',
+      name: 'slg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sports`
+  String get spg {
+    return Intl.message(
+      'Sports',
+      name: 'spg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shooter`
+  String get stg {
+    return Intl.message(
+      'Shooter',
+      name: 'stg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Third-person shooter`
+  String get tps {
+    return Intl.message(
+      'Third-person shooter',
+      name: 'tps',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Genre`
+  String get genre {
+    return Intl.message(
+      'Genre',
+      name: 'genre',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
