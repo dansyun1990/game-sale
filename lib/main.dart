@@ -6,10 +6,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutterfire_ui/i10n.dart';
+import 'package:game_sale/constants/game_genre.dart';
+import 'package:game_sale/constants/game_platform.dart';
 import 'package:game_sale/pages/game/search_filter_page.dart';
 import 'package:game_sale/providers/language_selector_provider.dart';
 import 'package:game_sale/providers/theme_selector_provider.dart';
 import 'package:game_sale/screens/account_screen.dart';
+import 'package:game_sale/widgets/game_sale_card.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'constants/languages.dart';
@@ -65,7 +68,23 @@ class MyHomePage extends HookConsumerWidget {
       TabBarView(
         controller: tabController,
         children: [
-          Text('test1'),
+          ListView.builder(
+            itemCount: 2,
+            itemBuilder: (context, index) => GameSaleCard(
+                packageImage: 'assets/images/test.webp',
+                title: 'レインボーシックス シージ',
+                genre: GameGenre.values
+                    .firstWhere((gameGenre) => gameGenre.key == 'FPS')
+                    .value,
+                platform: GamePlatform.values
+                    .firstWhere((gamePlatform) => gamePlatform.key == 0)
+                    .value,
+                basePrice: 3960,
+                salePrice: 1188,
+                discountPercent: 70,
+                discountedUntil: DateTime(2022, 1, 10, 23, 0),
+                now: DateTime.now()),
+          ),
           Text('test'),
         ],
       ),
