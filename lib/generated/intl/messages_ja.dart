@@ -32,7 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "darkDescription": MessageLookupByLibrary.simpleMessage("黒を基調とした暗いテーマ"),
         "email": MessageLookupByLibrary.simpleMessage("メールアドレス"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("パスワードを忘れた?"),
-        "fps": MessageLookupByLibrary.simpleMessage("ファーストパーソン・シューティングゲーム"),
+        "fps": MessageLookupByLibrary.simpleMessage("ファーストパーソン・シューティング"),
         "ftg": MessageLookupByLibrary.simpleMessage("対戦型格闘"),
         "genre": MessageLookupByLibrary.simpleMessage("ジャンル"),
         "invalidEmail": MessageLookupByLibrary.simpleMessage("無効なメールアドレス"),
