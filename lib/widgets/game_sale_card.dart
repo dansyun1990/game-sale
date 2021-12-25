@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:game_sale/constants/game_platform.dart';
+import 'package:game_sale/generated/l10n.dart';
+import 'package:game_sale/widgets/platform_tag.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
@@ -19,7 +22,7 @@ class GameSaleCard extends HookConsumerWidget {
   final String packageImage;
   final String title;
   final String genre;
-  final String platform;
+  final GamePlatform platform;
   final int basePrice;
   final int salePrice;
   final int discountPercent;
@@ -77,17 +80,7 @@ class GameSaleCard extends HookConsumerWidget {
                               ],
                             ),
                           ),
-                          Chip(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 3.0),
-                            label: Text(platform),
-                            materialTapTargetSize:
-                                MaterialTapTargetSize.shrinkWrap,
-                            labelStyle: const TextStyle(
-                              fontSize: 11.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          PlatformTag(platform: platform),
                         ],
                       ),
                       Expanded(
@@ -147,8 +140,10 @@ class GameSaleCard extends HookConsumerWidget {
                                     ),
                                     const TextSpan(text: '\n'),
                                     TextSpan(
-                                      text:
-                                          '残り${discountedUntil.difference(now).inDays}日',
+                                      text: S.of(context).daysLeft(
+                                          discountedUntil
+                                              .difference(now)
+                                              .inDays),
                                       style: const TextStyle(fontSize: 8.0),
                                     ),
                                   ],
