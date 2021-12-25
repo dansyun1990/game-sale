@@ -1,5 +1,8 @@
 {
   "@@locale": "zh",
+  "appName": "游戏折扣",
+  "game": "游戏",
+  "account": "账号",
   "login": "登录",
   "accountConfirm": "没有账号?",
   "register": "注册",
@@ -40,5 +43,10 @@
   "spg": "运动",
   "stg": "射击",
   "tps": "第三人称射击",
-  "genre": "类型"
+  "genre": "类型",
+  "priceUndecided": "价格未定",
+  "releaseUndecided": "发售日未定",
+  "comingSoon": "即将发售",
+  "daysSale": "距离发售还有{day}天",
+  "daysLeft": "还剩{day}天"
 }

@@ -20,22 +20,32 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'zh';
 
-  static String m0(name) => "${name}不能为空";
+  static String m0(day) => "还剩${day}天";
+
+  static String m1(day) => "距离发售还有${day}天";
+
+  static String m2(name) => "${name}不能为空";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "account": MessageLookupByLibrary.simpleMessage("账号"),
         "accountConfirm": MessageLookupByLibrary.simpleMessage("没有账号?"),
         "act": MessageLookupByLibrary.simpleMessage("动作"),
         "adv": MessageLookupByLibrary.simpleMessage("冒险"),
+        "appName": MessageLookupByLibrary.simpleMessage("游戏折扣"),
+        "comingSoon": MessageLookupByLibrary.simpleMessage("即将发售"),
         "confirmPassword": MessageLookupByLibrary.simpleMessage("确认密码"),
         "dark": MessageLookupByLibrary.simpleMessage("深色"),
         "darkDescription": MessageLookupByLibrary.simpleMessage("以黑色为主调的深色主题"),
+        "daysLeft": m0,
+        "daysSale": m1,
         "email": MessageLookupByLibrary.simpleMessage("邮箱"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("忘记密码?"),
         "forgotPasswordMessage":
             MessageLookupByLibrary.simpleMessage("提供您的电子邮件，我们将向您发送一个链接以重置您的密码"),
         "fps": MessageLookupByLibrary.simpleMessage("第一人称射击"),
         "ftg": MessageLookupByLibrary.simpleMessage("格斗"),
+        "game": MessageLookupByLibrary.simpleMessage("游戏"),
         "genre": MessageLookupByLibrary.simpleMessage("类型"),
         "invalidEmail": MessageLookupByLibrary.simpleMessage("无效的邮箱"),
         "language": MessageLookupByLibrary.simpleMessage("语言"),
@@ -55,10 +65,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordUppercase":
             MessageLookupByLibrary.simpleMessage("至少得包含1个大写字母"),
         "platform": MessageLookupByLibrary.simpleMessage("平台"),
+        "priceUndecided": MessageLookupByLibrary.simpleMessage("价格未定"),
         "pzl": MessageLookupByLibrary.simpleMessage("解密"),
         "rcg": MessageLookupByLibrary.simpleMessage("赛车"),
         "register": MessageLookupByLibrary.simpleMessage("注册"),
-        "required": m0,
+        "releaseUndecided": MessageLookupByLibrary.simpleMessage("发售日未定"),
+        "required": m2,
         "resetPassword": MessageLookupByLibrary.simpleMessage("重置密码"),
         "rpg": MessageLookupByLibrary.simpleMessage("角色扮演"),
         "searchFilter": MessageLookupByLibrary.simpleMessage("查询过滤"),

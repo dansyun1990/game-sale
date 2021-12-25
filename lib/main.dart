@@ -1,18 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutterfire_ui/i10n.dart';
-import 'package:game_sale/constants/game_genre.dart';
-import 'package:game_sale/constants/game_platform.dart';
-import 'package:game_sale/pages/game/search_filter_page.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:game_sale/providers/language_selector_provider.dart';
 import 'package:game_sale/providers/theme_selector_provider.dart';
 import 'package:game_sale/screens/account_screen.dart';
-import 'package:game_sale/widgets/game_sale_card.dart';
+import 'package:game_sale/screens/game_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'constants/languages.dart';
@@ -22,7 +18,7 @@ import 'generated/l10n.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp, //縦固定
+    DeviceOrientation.portraitUp,
   ]);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -37,13 +33,13 @@ class MyApp extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Game sale',
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       themeMode: ref.watch(themeSelectorProvider),
       home: const MyHomePage(),
       locale: Locale(ref.watch(languageSelectorProvider).value),
-      localizationsDelegates: [
+      localizationsDelegates: const [
         S.delegate,
         GlobalCupertinoLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -59,97 +55,25 @@ class MyHomePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    CollectionReference _firebaseFirestore =
-        FirebaseFirestore.instance.collection('games');
-
     final selectIndex = useState(0);
-    var tabController = useTabController(initialLength: 2);
-    var page = [
-      TabBarView(
-        controller: tabController,
-        children: [
-          ListView.builder(
-            itemCount: 2,
-            itemBuilder: (context, index) => GameSaleCard(
-                packageImage: 'assets/images/test.webp',
-                title: 'レインボーシックス シージ',
-                genre: GameGenre.values
-                    .firstWhere((gameGenre) => gameGenre.key == 'FPS')
-                    .value,
-                platform: GamePlatform.values
-                    .firstWhere((gamePlatform) => gamePlatform.key == 0)
-                    .value,
-                basePrice: 3960,
-                salePrice: 1188,
-                discountPercent: 70,
-                discountedUntil: DateTime(2022, 1, 10, 23, 0),
-                now: DateTime.now()),
-          ),
-          Text('test'),
-        ],
-      ),
-      AccountScreen()
-    ];
+    final page = [GameScreen(), AccountScreen()];
 
     return Scaffold(
-      appBar: selectIndex.value == 0
-          ? AppBar(
-              toolbarHeight: 80.0,
-              title: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    icon: Icon(
-                      Icons.search,
-                      color: Colors.grey,
-                    ),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                  ),
-                ),
-              ),
-              actions: [
-                IconButton(
-                  onPressed: () => {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute<bool>(
-                            builder: (BuildContext context) =>
-                                SearchFilterPage()))
-                  },
-                  icon: const Icon(Icons.filter_alt),
-                )
-              ],
-              bottom: selectIndex.value == 0
-                  ? TabBar(
-                      controller: tabController,
-                      tabs: [
-                        Tab(
-                          text: 'セール情報',
-                        ),
-                        Tab(
-                          text: 'リリース',
-                        )
-                      ],
-                    )
-                  : null,
-            )
-          : null,
-      body: Center(
-        child: page[selectIndex.value],
-      ),
-      bottomNavigationBar: ConvexAppBar(
-        style: TabStyle.react,
+      body: page[selectIndex.value],
+      bottomNavigationBar: BottomNavyBar(
         items: [
-          TabItem(icon: Icons.home, title: 'ゲーム'),
-          TabItem(icon: Icons.account_circle, title: 'アカウント'),
+          BottomNavyBarItem(
+            icon: const FaIcon(FontAwesomeIcons.gamepad),
+            title: Text(S.of(context).game),
+          ),
+          BottomNavyBarItem(
+            icon: const FaIcon(FontAwesomeIcons.userCog),
+            title: Text(S.of(context).account),
+          ),
         ],
-        initialActiveIndex: selectIndex.value,
-        onTap: (index) {
+        mainAxisAlignment: MainAxisAlignment.center,
+        selectedIndex: selectIndex.value,
+        onItemSelected: (index) {
           selectIndex.value = index;
         },
       ),

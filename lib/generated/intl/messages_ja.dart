@@ -20,20 +20,32 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ja';
 
-  static String m0(name) => "${name}は必須です";
+  static String m0(day) => "残り${day}日";
+
+  static String m1(day) => "発売まであと${day}日";
+
+  static String m2(name) => "${name}は必須です";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "account": MessageLookupByLibrary.simpleMessage("アカウント"),
         "accountConfirm": MessageLookupByLibrary.simpleMessage("アカウントがありません?"),
         "act": MessageLookupByLibrary.simpleMessage("アクション"),
         "adv": MessageLookupByLibrary.simpleMessage("アドベンチャー"),
+        "appName": MessageLookupByLibrary.simpleMessage("ゲームセール"),
+        "comingSoon": MessageLookupByLibrary.simpleMessage("まもなく発売"),
         "confirmPassword": MessageLookupByLibrary.simpleMessage("パスワード確認"),
         "dark": MessageLookupByLibrary.simpleMessage("ダーク"),
         "darkDescription": MessageLookupByLibrary.simpleMessage("黒を基調とした暗いテーマ"),
+        "daysLeft": m0,
+        "daysSale": m1,
         "email": MessageLookupByLibrary.simpleMessage("メールアドレス"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("パスワードを忘れた?"),
+        "forgotPasswordMessage": MessageLookupByLibrary.simpleMessage(
+            "メールアドレスを入力すると、パスワードリセットのリンクが送信されます"),
         "fps": MessageLookupByLibrary.simpleMessage("ファーストパーソン・シューティング"),
         "ftg": MessageLookupByLibrary.simpleMessage("対戦型格闘"),
+        "game": MessageLookupByLibrary.simpleMessage("ゲーム"),
         "genre": MessageLookupByLibrary.simpleMessage("ジャンル"),
         "invalidEmail": MessageLookupByLibrary.simpleMessage("無効なメールアドレス"),
         "language": MessageLookupByLibrary.simpleMessage("言語"),
@@ -56,10 +68,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordUppercase":
             MessageLookupByLibrary.simpleMessage("1つの英大文字を含む必要があります"),
         "platform": MessageLookupByLibrary.simpleMessage("プラットフォーム"),
+        "priceUndecided": MessageLookupByLibrary.simpleMessage("価格未定"),
         "pzl": MessageLookupByLibrary.simpleMessage("パズル"),
         "rcg": MessageLookupByLibrary.simpleMessage("レース"),
         "register": MessageLookupByLibrary.simpleMessage("登録"),
-        "required": m0,
+        "releaseUndecided": MessageLookupByLibrary.simpleMessage("発売日未定"),
+        "required": m2,
         "resetPassword": MessageLookupByLibrary.simpleMessage("パスワード再設定"),
         "rpg": MessageLookupByLibrary.simpleMessage("ロールプレイング"),
         "searchFilter": MessageLookupByLibrary.simpleMessage("検索フィルター"),
