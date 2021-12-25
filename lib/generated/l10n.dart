@@ -50,6 +50,36 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Game sale`
+  String get appName {
+    return Intl.message(
+      'Game sale',
+      name: 'appName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Game`
+  String get game {
+    return Intl.message(
+      'Game',
+      name: 'game',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get account {
+    return Intl.message(
+      'Account',
+      name: 'account',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Login`
   String get login {
     return Intl.message(
@@ -457,6 +487,56 @@ class S {
       name: 'genre',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Price undecided`
+  String get priceUndecided {
+    return Intl.message(
+      'Price undecided',
+      name: 'priceUndecided',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Release undecided`
+  String get releaseUndecided {
+    return Intl.message(
+      'Release undecided',
+      name: 'releaseUndecided',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Coming soon`
+  String get comingSoon {
+    return Intl.message(
+      'Coming soon',
+      name: 'comingSoon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{day} days going on sale`
+  String daysSale(Object day) {
+    return Intl.message(
+      '$day days going on sale',
+      name: 'daysSale',
+      desc: '',
+      args: [day],
+    );
+  }
+
+  /// `{day} days left`
+  String daysLeft(Object day) {
+    return Intl.message(
+      '$day days left',
+      name: 'daysLeft',
+      desc: '',
+      args: [day],
     );
   }
 }

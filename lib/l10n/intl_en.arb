@@ -1,5 +1,8 @@
 {
   "@@locale": "en",
+  "appName": "Game sale",
+  "game": "Game",
+  "account": "Account",
   "login": "Login",
   "accountConfirm": "Don't have an account?",
   "register": "Register",
@@ -40,5 +43,10 @@
   "spg": "Sports",
   "stg": "Shooter",
   "tps": "Third-person shooter",
-  "genre": "Genre"
+  "genre": "Genre",
+  "priceUndecided": "Price undecided",
+  "releaseUndecided": "Release undecided",
+  "comingSoon": "Coming soon",
+  "daysSale": "{day} days going on sale",
+  "daysLeft": "{day} days left"
 }

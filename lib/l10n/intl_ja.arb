@@ -1,10 +1,13 @@
 {
   "@@locale": "ja",
+  "appName": "ゲームセール",
+  "game": "ゲーム",
+  "account": "アカウント",
   "login": "ログイン",
   "accountConfirm": "アカウントがありません?",
   "register": "登録",
   "forgotPassword": "パスワードを忘れた?",
-  "forgotPassword_message": "メールアドレスを入力すると、パスワードリセットのリンクが送信されます",
+  "forgotPasswordMessage": "メールアドレスを入力すると、パスワードリセットのリンクが送信されます",
   "email": "メールアドレス",
   "password": "パスワード",
   "confirmPassword": "パスワード確認",
@@ -40,5 +43,10 @@
   "spg": "スポーツ",
   "stg": "シューティング",
   "tps": "サードパーソン・シューティング",
-  "genre": "ジャンル"
+  "genre": "ジャンル",
+  "priceUndecided": "価格未定",
+  "releaseUndecided": "発売日未定",
+  "comingSoon": "まもなく発売",
+  "daysSale": "発売まであと{day}日",
+  "daysLeft": "残り{day}日"
 }

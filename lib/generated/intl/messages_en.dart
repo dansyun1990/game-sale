@@ -20,19 +20,28 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(name) => "${name} is required";
+  static String m0(day) => "${day} days left";
+
+  static String m1(day) => "${day} days going on sale";
+
+  static String m2(name) => "${name} is required";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "account": MessageLookupByLibrary.simpleMessage("Account"),
         "accountConfirm":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "act": MessageLookupByLibrary.simpleMessage("Action"),
         "adv": MessageLookupByLibrary.simpleMessage("Adventure"),
+        "appName": MessageLookupByLibrary.simpleMessage("Game sale"),
+        "comingSoon": MessageLookupByLibrary.simpleMessage("Coming soon"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),
         "darkDescription":
             MessageLookupByLibrary.simpleMessage("Dark theme based on black"),
+        "daysLeft": m0,
+        "daysSale": m1,
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password?"),
@@ -40,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Provide your email and we will send you a link to reset your password"),
         "fps": MessageLookupByLibrary.simpleMessage("First-person shooter"),
         "ftg": MessageLookupByLibrary.simpleMessage("Fighting"),
+        "game": MessageLookupByLibrary.simpleMessage("Game"),
         "genre": MessageLookupByLibrary.simpleMessage("Genre"),
         "invalidEmail":
             MessageLookupByLibrary.simpleMessage("Invalid email address"),
@@ -64,10 +74,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordUppercase": MessageLookupByLibrary.simpleMessage(
             "Should contain at least one uppercase"),
         "platform": MessageLookupByLibrary.simpleMessage("Platform"),
+        "priceUndecided":
+            MessageLookupByLibrary.simpleMessage("Price undecided"),
         "pzl": MessageLookupByLibrary.simpleMessage("Puzzle"),
         "rcg": MessageLookupByLibrary.simpleMessage("Racing"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
-        "required": m0,
+        "releaseUndecided":
+            MessageLookupByLibrary.simpleMessage("Release undecided"),
+        "required": m2,
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset password"),
         "rpg": MessageLookupByLibrary.simpleMessage("Role-playing"),
         "searchFilter": MessageLookupByLibrary.simpleMessage("Search filter"),
