@@ -5,25 +5,24 @@ import 'package:game_sale/constants/password_type.dart';
 import 'package:game_sale/generated/l10n.dart';
 import 'package:game_sale/pages/account/forgot_password_page.dart';
 import 'package:game_sale/pages/account/register_page.dart';
+import 'package:game_sale/utils/util.dart';
 import 'package:game_sale/widgets/email_form_field.dart';
 import 'package:game_sale/widgets/password_form_field.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class LoginPage extends HookConsumerWidget {
-  LoginPage({Key? key}) : super(key: key);
+class SignInPage extends HookWidget {
+  SignInPage({Key? key}) : super(key: key);
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text(S.of(context).login),
+        title: Text(S.of(context).signIn),
       ),
       body: Form(
         key: _formKey,
@@ -48,7 +47,7 @@ class LoginPage extends HookConsumerWidget {
                           )
                         },
                         child: Text(
-                          S.of(context).register,
+                          S.of(context).signUp,
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                       )
@@ -60,7 +59,7 @@ class LoginPage extends HookConsumerWidget {
                 PasswordFormField(
                   controller: passwordController,
                   labelText: S.of(context).confirmPassword,
-                  passwordType: PasswordType.login,
+                  passwordType: PasswordType.signIn,
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -86,13 +85,16 @@ class LoginPage extends HookConsumerWidget {
                   child: SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                      child: Text(S.of(context).login),
-                      onPressed: () => {
-                        if (_formKey.currentState!.validate())
-                          {
-                            _signInWithEmailAndPassword(
-                                emailController.text, passwordController.text)
-                          },
+                      child: Text(S.of(context).signIn),
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          showLoaderDialog(context);
+                          await _signIn(
+                              context: context,
+                              email: emailController.text,
+                              password: passwordController.text);
+                          Navigator.pop(context);
+                        }
                       },
                     ),
                   ),
@@ -105,17 +107,24 @@ class LoginPage extends HookConsumerWidget {
     );
   }
 
-  Future<void> _signInWithEmailAndPassword(
-      String email, String password) async {
+  Future<void> _signIn({
+    required BuildContext context,
+    required String email,
+    required String password,
+  }) async {
     try {
-      final User user = (await _auth.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
-      ))
-          .user!;
-      var test2 = user;
-    } catch (e) {
-      var test = e;
+      );
+      Navigator.pop(context);
+    } on FirebaseAuthException {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(S.of(context).authenticationFailed),
+          duration: const Duration(seconds: 3),
+        ),
+      );
     }
   }
 }
