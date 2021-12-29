@@ -7,15 +7,15 @@ import 'package:game_sale/generated/l10n.dart';
 import 'package:game_sale/utils/util.dart';
 import 'package:game_sale/widgets/email_form_field.dart';
 import 'package:game_sale/widgets/password_form_field.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class RegisterPage extends HookConsumerWidget {
+/// サインアップページを作成
+class RegisterPage extends HookWidget {
   RegisterPage({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
     final confirmPasswordController = useTextEditingController();
@@ -95,6 +95,7 @@ class RegisterPage extends HookConsumerWidget {
       await FirebaseFirestore.instance.collection('users').doc(user!.uid).set({
         'userName': 'userName',
         'email': email,
+        'favorites': [],
         'createdAt': Timestamp.now(),
       });
       var count = 0;
