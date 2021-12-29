@@ -80,11 +80,31 @@ class S {
     );
   }
 
-  /// `Login`
-  String get login {
+  /// `Sign in`
+  String get signIn {
     return Intl.message(
-      'Login',
-      name: 'login',
+      'Sign in',
+      name: 'signIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please sign in`
+  String get signInMessage {
+    return Intl.message(
+      'Please sign in',
+      name: 'signInMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign out`
+  String get signOut {
+    return Intl.message(
+      'Sign out',
+      name: 'signOut',
       desc: '',
       args: [],
     );
@@ -100,11 +120,11 @@ class S {
     );
   }
 
-  /// `Register`
-  String get register {
+  /// `Sign up`
+  String get signUp {
     return Intl.message(
-      'Register',
-      name: 'register',
+      'Sign up',
+      name: 'signUp',
       desc: '',
       args: [],
     );
@@ -260,6 +280,66 @@ class S {
     );
   }
 
+  /// `The account already exists for that email.`
+  String get emailAlreadyInUse {
+    return Intl.message(
+      'The account already exists for that email.',
+      name: 'emailAlreadyInUse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The password is incorrect or the email cannot be recognized.`
+  String get authenticationFailed {
+    return Intl.message(
+      'The password is incorrect or the email cannot be recognized.',
+      name: 'authenticationFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to create a user.`
+  String get createUserFailed {
+    return Intl.message(
+      'Failed to create a user.',
+      name: 'createUserFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The email was sent successfully.`
+  String get sendingSuccess {
+    return Intl.message(
+      'The email was sent successfully.',
+      name: 'sendingSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User not found.`
+  String get userNotFound {
+    return Intl.message(
+      'User not found.',
+      name: 'userNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to send email.`
+  String get sendingFailed {
+    return Intl.message(
+      'Failed to send email.',
+      name: 'sendingFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Settings`
   String get settings {
     return Intl.message(
@@ -275,16 +355,6 @@ class S {
     return Intl.message(
       'Theme',
       name: 'theme',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Language`
-  String get language {
-    return Intl.message(
-      'Language',
-      name: 'language',
       desc: '',
       args: [],
     );
@@ -365,6 +435,26 @@ class S {
     return Intl.message(
       'Platform',
       name: 'platform',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deals`
+  String get deals {
+    return Intl.message(
+      'Deals',
+      name: 'deals',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Coming soon`
+  String get release {
+    return Intl.message(
+      'Coming soon',
+      name: 'release',
       desc: '',
       args: [],
     );
@@ -537,6 +627,106 @@ class S {
       name: 'daysLeft',
       desc: '',
       args: [day],
+    );
+  }
+
+  /// `Sort by release date`
+  String get releaseDateSort {
+    return Intl.message(
+      'Sort by release date',
+      name: 'releaseDateSort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sort by sale price`
+  String get salePriceSort {
+    return Intl.message(
+      'Sort by sale price',
+      name: 'salePriceSort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Basic info`
+  String get basicInfo {
+    return Intl.message(
+      'Basic info',
+      name: 'basicInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get name {
+    return Intl.message(
+      'Name',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Developer`
+  String get developer {
+    return Intl.message(
+      'Developer',
+      name: 'developer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Publisher`
+  String get publisher {
+    return Intl.message(
+      'Publisher',
+      name: 'publisher',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Release`
+  String get releaseDate {
+    return Intl.message(
+      'Release',
+      name: 'releaseDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Voice`
+  String get voice {
+    return Intl.message(
+      'Voice',
+      name: 'voice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Languages`
+  String get languages {
+    return Intl.message(
+      'Languages',
+      name: 'languages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get desc {
+    return Intl.message(
+      'Description',
+      name: 'desc',
+      desc: '',
+      args: [],
     );
   }
 }
