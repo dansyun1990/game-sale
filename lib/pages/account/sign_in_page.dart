@@ -9,10 +9,11 @@ import 'package:game_sale/utils/util.dart';
 import 'package:game_sale/widgets/email_form_field.dart';
 import 'package:game_sale/widgets/password_form_field.dart';
 
+/// サインインページを作成
 class SignInPage extends HookWidget {
   SignInPage({Key? key}) : super(key: key);
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,21 +32,17 @@ class SignInPage extends HookWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
+              children: [
                 Container(
                   alignment: Alignment.centerLeft,
                   child: Row(
                     children: [
                       Text(S.of(context).accountConfirm),
                       TextButton(
-                        onPressed: () => {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute<bool>(
-                              builder: (BuildContext context) => RegisterPage(),
-                            ),
-                          )
-                        },
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => RegisterPage()),
+                        ),
                         child: Text(
                           S.of(context).signUp,
                           style: const TextStyle(fontWeight: FontWeight.bold),
@@ -65,15 +62,10 @@ class SignInPage extends HookWidget {
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute<bool>(
-                          builder: (BuildContext context) =>
-                              ForgotPasswordPage(),
-                        ),
-                      )
-                    },
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => ForgotPasswordPage()),
+                    ),
                     child: Text(
                       S.of(context).forgotPassword,
                       style: const TextStyle(fontWeight: FontWeight.bold),

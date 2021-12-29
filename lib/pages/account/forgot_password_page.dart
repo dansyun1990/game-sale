@@ -5,10 +5,11 @@ import 'package:game_sale/generated/l10n.dart';
 import 'package:game_sale/utils/util.dart';
 import 'package:game_sale/widgets/email_form_field.dart';
 
+/// パスワードを忘れページを作成
 class ForgotPasswordPage extends HookWidget {
   ForgotPasswordPage({Key? key}) : super(key: key);
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class ForgotPasswordPage extends HookWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
+              children: [
                 Container(
                   padding: const EdgeInsets.only(bottom: 16.0),
                   alignment: Alignment.centerLeft,
