@@ -30,6 +30,7 @@
   "userNotFound": "用户不存在。",
   "sendingFailed": "发送电子邮件失败。",
   "settings": "设定",
+  "favorite": "收藏",
   "theme": "主题",
   "system": "系统",
   "light": "浅色",
@@ -43,7 +44,6 @@
   "release": "发售表",
   "act": "动作",
   "adv": "冒险",
-  "fps": "第一人称射击",
   "ftg": "格斗",
   "pzl": "解密",
   "rcg": "赛车",
@@ -51,7 +51,6 @@
   "slg": "模拟",
   "spg": "运动",
   "stg": "射击",
-  "tps": "第三人称射击",
   "genre": "类型",
   "priceUndecided": "价格未定",
   "releaseUndecided": "发售日未定",
@@ -67,5 +66,9 @@
   "releaseDate": "发售日",
   "voice": "语音",
   "languages": "语言",
-  "desc": "简介"
+  "desc": "简介",
+  "gameDetail": "游戏详情",
+  "gameInfo": "游戏情报",
+  "noResults": "没有检索到一致的结果。",
+  "searchMessage": "用游戏的全名进行检索"
 }
