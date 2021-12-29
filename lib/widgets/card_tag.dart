@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 
+/// カード用のタグを作成
 class CardTag extends StatelessWidget {
-  const CardTag(
-      {Key? key,
-      required this.text,
-      required this.textColor,
-      required this.backgroundColor})
-      : super(key: key);
+  const CardTag({
+    Key? key,
+    required this.text,
+    required this.textColor,
+    required this.backgroundColor,
+  }) : super(key: key);
 
+  /// タグの名称
   final String text;
+
+  /// タグの色
   final Color textColor;
+
+  /// タグの背景色
   final Color backgroundColor;
 
   @override
