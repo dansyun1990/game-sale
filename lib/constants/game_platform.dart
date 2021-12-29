@@ -1,21 +1,25 @@
-enum GamePlatform { ps4, ps5, nintendoSwitch, steam }
+enum GamePlatform { all, ps4, ps5, nintendoSwitch, steam }
 
 extension GamePlatformExtension on GamePlatform {
-  int get key {
+  String? get key {
     switch (this) {
+      case GamePlatform.all:
+        return null;
       case GamePlatform.ps4:
-        return 0;
+        return 'PS4';
       case GamePlatform.ps5:
-        return 1;
+        return 'PS5';
       case GamePlatform.nintendoSwitch:
-        return 2;
+        return 'Switch';
       case GamePlatform.steam:
-        return 3;
+        return 'Steam';
     }
   }
 
   String get value {
     switch (this) {
+      case GamePlatform.all:
+        return 'All';
       case GamePlatform.ps4:
         return 'PS4';
       case GamePlatform.ps5:
