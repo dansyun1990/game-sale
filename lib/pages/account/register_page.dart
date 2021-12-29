@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:game_sale/constants/password_type.dart';
 import 'package:game_sale/generated/l10n.dart';
+import 'package:game_sale/utils/util.dart';
 import 'package:game_sale/widgets/email_form_field.dart';
 import 'package:game_sale/widgets/password_form_field.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -10,8 +12,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class RegisterPage extends HookConsumerWidget {
   RegisterPage({Key? key}) : super(key: key);
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,7 +23,7 @@ class RegisterPage extends HookConsumerWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text(S.of(context).register),
+        title: Text(S.of(context).signUp),
       ),
       body: Form(
         key: _formKey,
@@ -56,9 +57,17 @@ class RegisterPage extends HookConsumerWidget {
                   child: SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                      child: Text(S.of(context).register),
-                      onPressed: () => {
-                        if (_formKey.currentState!.validate()) {},
+                      child: Text(S.of(context).signUp),
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          showLoaderDialog(context);
+                          await _signUp(
+                            context: context,
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
+                          Navigator.pop(context);
+                        }
                       },
                     ),
                   ),
@@ -69,5 +78,43 @@ class RegisterPage extends HookConsumerWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _signUp({
+    required BuildContext context,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final user = (await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      ))
+          .user;
+
+      await FirebaseFirestore.instance.collection('users').doc(user!.uid).set({
+        'userName': 'userName',
+        'email': email,
+        'createdAt': Timestamp.now(),
+      });
+      var count = 0;
+      Navigator.popUntil(context, (_) => count++ >= 2);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(S.of(context).emailAlreadyInUse),
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(S.of(context).createUserFailed),
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
+    }
   }
 }
