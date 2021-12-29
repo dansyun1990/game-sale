@@ -4,6 +4,7 @@ import 'package:game_sale/generated/l10n.dart';
 import 'package:game_sale/providers/theme_selector_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+/// テーマ変更ページを作成
 class ThemePage extends HookConsumerWidget {
   const ThemePage({Key? key}) : super(key: key);
 
@@ -19,15 +20,14 @@ class ThemePage extends HookConsumerWidget {
             shrinkWrap: true,
             itemCount: ThemeMode.values.length,
             itemBuilder: (_, index) {
-              final themeMode = ThemeMode.values[index];
+              final themeMode = ThemeMode.values.elementAt(index);
               return RadioListTile<ThemeMode>(
                 value: themeMode,
                 groupValue: ref.watch(themeSelectorProvider),
                 title: Text(themeMode.title),
                 subtitle: Text(themeMode.subTitle),
-                onChanged: (newTheme) {
-                  ref.watch(themeSelectorProvider.notifier).change(newTheme!);
-                },
+                onChanged: (newTheme) =>
+                    ref.watch(themeSelectorProvider.notifier).change(newTheme!),
               );
             },
           );
