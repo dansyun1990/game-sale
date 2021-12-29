@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// ローディングダイアログを表示
 showLoaderDialog(BuildContext context) {
   AlertDialog alert = const AlertDialog(
     backgroundColor: Colors.transparent,
