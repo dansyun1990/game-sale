@@ -1,1 +1,1 @@
-enum PasswordType { register, confirm, login }
+enum PasswordType { register, confirm, signIn }

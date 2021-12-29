@@ -1,6 +1,6 @@
 import 'package:game_sale/generated/l10n.dart';
 
-enum GameGenre { act, adv, fps, ftg, pzl, rcg, rpg, slg, spg, stg, tps }
+enum GameGenre { act, adv, ftg, pzl, rcg, rpg, slg, spg, stg }
 
 extension GameGenreExtension on GameGenre {
   String get key {
@@ -9,8 +9,6 @@ extension GameGenreExtension on GameGenre {
         return 'ACT';
       case GameGenre.adv:
         return 'ADV';
-      case GameGenre.fps:
-        return 'FPS';
       case GameGenre.ftg:
         return 'FTG';
       case GameGenre.pzl:
@@ -25,8 +23,6 @@ extension GameGenreExtension on GameGenre {
         return 'SPG';
       case GameGenre.stg:
         return 'STG';
-      case GameGenre.tps:
-        return 'TPS';
     }
   }
 
@@ -36,8 +32,6 @@ extension GameGenreExtension on GameGenre {
         return S.current.act;
       case GameGenre.adv:
         return S.current.adv;
-      case GameGenre.fps:
-        return S.current.fps;
       case GameGenre.ftg:
         return S.current.ftg;
       case GameGenre.pzl:
@@ -52,8 +46,6 @@ extension GameGenreExtension on GameGenre {
         return S.current.spg;
       case GameGenre.stg:
         return S.current.stg;
-      case GameGenre.tps:
-        return S.current.tps;
     }
   }
 }
