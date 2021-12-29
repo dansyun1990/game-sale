@@ -4,11 +4,10 @@ import 'package:game_sale/constants/game_genre.dart';
 import 'package:game_sale/constants/game_platform.dart';
 import 'package:game_sale/generated/l10n.dart';
 import 'package:game_sale/widgets/platform_tag.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
 /// ゲームセール用のカードを作成
-class GameSaleCard extends HookConsumerWidget {
+class GameSaleCard extends StatelessWidget {
   const GameSaleCard({
     Key? key,
     required this.coverArt,
@@ -50,7 +49,7 @@ class GameSaleCard extends HookConsumerWidget {
   final DateTime now;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
       child: Card(
