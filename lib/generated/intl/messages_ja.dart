@@ -33,13 +33,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "act": MessageLookupByLibrary.simpleMessage("アクション"),
         "adv": MessageLookupByLibrary.simpleMessage("アドベンチャー"),
         "appName": MessageLookupByLibrary.simpleMessage("ゲームセール"),
+        "authenticationFailed": MessageLookupByLibrary.simpleMessage(
+            "入力したメールアドレスまたはパスワードに誤りがあります。"),
+        "basicInfo": MessageLookupByLibrary.simpleMessage("基本情報"),
         "comingSoon": MessageLookupByLibrary.simpleMessage("まもなく発売"),
         "confirmPassword": MessageLookupByLibrary.simpleMessage("パスワード確認"),
+        "createUserFailed":
+            MessageLookupByLibrary.simpleMessage("ユーザ作成に失敗しました。"),
         "dark": MessageLookupByLibrary.simpleMessage("ダーク"),
         "darkDescription": MessageLookupByLibrary.simpleMessage("黒を基調とした暗いテーマ"),
         "daysLeft": m0,
         "daysSale": m1,
+        "deals": MessageLookupByLibrary.simpleMessage("セール"),
+        "desc": MessageLookupByLibrary.simpleMessage("説明"),
+        "developer": MessageLookupByLibrary.simpleMessage("開発元"),
         "email": MessageLookupByLibrary.simpleMessage("メールアドレス"),
+        "emailAlreadyInUse":
+            MessageLookupByLibrary.simpleMessage("メールアドレスは既に使われています。"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("パスワードを忘れた?"),
         "forgotPasswordMessage": MessageLookupByLibrary.simpleMessage(
             "メールアドレスを入力すると、パスワードリセットのリンクが送信されます"),
@@ -48,11 +58,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "game": MessageLookupByLibrary.simpleMessage("ゲーム"),
         "genre": MessageLookupByLibrary.simpleMessage("ジャンル"),
         "invalidEmail": MessageLookupByLibrary.simpleMessage("無効なメールアドレス"),
-        "language": MessageLookupByLibrary.simpleMessage("言語"),
+        "languages": MessageLookupByLibrary.simpleMessage("言語"),
         "light": MessageLookupByLibrary.simpleMessage("ライト"),
         "lightDescription":
             MessageLookupByLibrary.simpleMessage("白を基調とした明るいテーマ"),
-        "login": MessageLookupByLibrary.simpleMessage("ログイン"),
+        "name": MessageLookupByLibrary.simpleMessage("名称"),
         "password": MessageLookupByLibrary.simpleMessage("パスワード"),
         "passwordDigit":
             MessageLookupByLibrary.simpleMessage("1つの数字を含む必要があります"),
@@ -69,15 +79,25 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("1つの英大文字を含む必要があります"),
         "platform": MessageLookupByLibrary.simpleMessage("プラットフォーム"),
         "priceUndecided": MessageLookupByLibrary.simpleMessage("価格未定"),
+        "publisher": MessageLookupByLibrary.simpleMessage("発売元"),
         "pzl": MessageLookupByLibrary.simpleMessage("パズル"),
         "rcg": MessageLookupByLibrary.simpleMessage("レース"),
-        "register": MessageLookupByLibrary.simpleMessage("登録"),
+        "release": MessageLookupByLibrary.simpleMessage("発売予定"),
+        "releaseDate": MessageLookupByLibrary.simpleMessage("発売日"),
+        "releaseDateSort": MessageLookupByLibrary.simpleMessage("リリース日で並び替え"),
         "releaseUndecided": MessageLookupByLibrary.simpleMessage("発売日未定"),
         "required": m2,
         "resetPassword": MessageLookupByLibrary.simpleMessage("パスワード再設定"),
         "rpg": MessageLookupByLibrary.simpleMessage("ロールプレイング"),
+        "salePriceSort": MessageLookupByLibrary.simpleMessage("セール価格で並び替え"),
         "searchFilter": MessageLookupByLibrary.simpleMessage("検索フィルター"),
+        "sendingFailed": MessageLookupByLibrary.simpleMessage("メール送信に失敗しました。"),
+        "sendingSuccess": MessageLookupByLibrary.simpleMessage("メール送信に成功しました。"),
         "settings": MessageLookupByLibrary.simpleMessage("設定"),
+        "signIn": MessageLookupByLibrary.simpleMessage("サインイン"),
+        "signInMessage": MessageLookupByLibrary.simpleMessage("サインインしてくだい"),
+        "signOut": MessageLookupByLibrary.simpleMessage("サインアウト"),
+        "signUp": MessageLookupByLibrary.simpleMessage("サインアップ"),
         "slg": MessageLookupByLibrary.simpleMessage("シミュレーション"),
         "spg": MessageLookupByLibrary.simpleMessage("スポーツ"),
         "stg": MessageLookupByLibrary.simpleMessage("シューティング"),
@@ -85,6 +105,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "systemDescription":
             MessageLookupByLibrary.simpleMessage("端末のシステム設定に追従"),
         "theme": MessageLookupByLibrary.simpleMessage("テーマ"),
-        "tps": MessageLookupByLibrary.simpleMessage("サードパーソン・シューティング")
+        "tps": MessageLookupByLibrary.simpleMessage("サードパーソン・シューティング"),
+        "userNotFound": MessageLookupByLibrary.simpleMessage("ユーザが存在しません。"),
+        "voice": MessageLookupByLibrary.simpleMessage("音声")
       };
 }

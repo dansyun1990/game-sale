@@ -34,15 +34,25 @@ class MessageLookup extends MessageLookupByLibrary {
         "act": MessageLookupByLibrary.simpleMessage("Action"),
         "adv": MessageLookupByLibrary.simpleMessage("Adventure"),
         "appName": MessageLookupByLibrary.simpleMessage("Game sale"),
+        "authenticationFailed": MessageLookupByLibrary.simpleMessage(
+            "The password is incorrect or the email cannot be recognized."),
+        "basicInfo": MessageLookupByLibrary.simpleMessage("Basic info"),
         "comingSoon": MessageLookupByLibrary.simpleMessage("Coming soon"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
+        "createUserFailed":
+            MessageLookupByLibrary.simpleMessage("Failed to create a user."),
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),
         "darkDescription":
             MessageLookupByLibrary.simpleMessage("Dark theme based on black"),
         "daysLeft": m0,
         "daysSale": m1,
+        "deals": MessageLookupByLibrary.simpleMessage("Deals"),
+        "desc": MessageLookupByLibrary.simpleMessage("Description"),
+        "developer": MessageLookupByLibrary.simpleMessage("Developer"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+            "The account already exists for that email."),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password?"),
         "forgotPasswordMessage": MessageLookupByLibrary.simpleMessage(
@@ -53,11 +63,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "genre": MessageLookupByLibrary.simpleMessage("Genre"),
         "invalidEmail":
             MessageLookupByLibrary.simpleMessage("Invalid email address"),
-        "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "languages": MessageLookupByLibrary.simpleMessage("Languages"),
         "light": MessageLookupByLibrary.simpleMessage("Light"),
         "lightDescription":
             MessageLookupByLibrary.simpleMessage("Light theme based on white"),
-        "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "name": MessageLookupByLibrary.simpleMessage("Name"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordDigit": MessageLookupByLibrary.simpleMessage(
             "Should contain at least one digit"),
@@ -76,16 +86,30 @@ class MessageLookup extends MessageLookupByLibrary {
         "platform": MessageLookupByLibrary.simpleMessage("Platform"),
         "priceUndecided":
             MessageLookupByLibrary.simpleMessage("Price undecided"),
+        "publisher": MessageLookupByLibrary.simpleMessage("Publisher"),
         "pzl": MessageLookupByLibrary.simpleMessage("Puzzle"),
         "rcg": MessageLookupByLibrary.simpleMessage("Racing"),
-        "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "release": MessageLookupByLibrary.simpleMessage("Coming soon"),
+        "releaseDate": MessageLookupByLibrary.simpleMessage("Release"),
+        "releaseDateSort":
+            MessageLookupByLibrary.simpleMessage("Sort by release date"),
         "releaseUndecided":
             MessageLookupByLibrary.simpleMessage("Release undecided"),
         "required": m2,
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset password"),
         "rpg": MessageLookupByLibrary.simpleMessage("Role-playing"),
+        "salePriceSort":
+            MessageLookupByLibrary.simpleMessage("Sort by sale price"),
         "searchFilter": MessageLookupByLibrary.simpleMessage("Search filter"),
+        "sendingFailed":
+            MessageLookupByLibrary.simpleMessage("Failed to send email."),
+        "sendingSuccess": MessageLookupByLibrary.simpleMessage(
+            "The email was sent successfully."),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "signIn": MessageLookupByLibrary.simpleMessage("Sign in"),
+        "signInMessage": MessageLookupByLibrary.simpleMessage("Please sign in"),
+        "signOut": MessageLookupByLibrary.simpleMessage("Sign out"),
+        "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
         "slg": MessageLookupByLibrary.simpleMessage("Simulation"),
         "spg": MessageLookupByLibrary.simpleMessage("Sports"),
         "stg": MessageLookupByLibrary.simpleMessage("Shooter"),
@@ -93,6 +117,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "systemDescription":
             MessageLookupByLibrary.simpleMessage("Follow the system settings"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
-        "tps": MessageLookupByLibrary.simpleMessage("Third-person shooter")
+        "tps": MessageLookupByLibrary.simpleMessage("Third-person shooter"),
+        "userNotFound": MessageLookupByLibrary.simpleMessage("User not found."),
+        "voice": MessageLookupByLibrary.simpleMessage("Voice")
       };
 }
