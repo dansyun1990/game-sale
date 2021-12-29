@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:game_sale/constants/game_platform.dart';
 
+/// ゲームプラットフォーム用のタグを作成
 class PlatformTag extends StatelessWidget {
   const PlatformTag({Key? key, required this.platform}) : super(key: key);
 
+  /// ゲームプラットフォーム
   final GamePlatform platform;
 
   @override
@@ -21,6 +23,8 @@ class PlatformTag extends StatelessWidget {
               return Colors.red;
             case GamePlatform.steam:
               return Colors.grey;
+            case GamePlatform.all:
+              break;
           }
         })(),
         borderRadius: const BorderRadius.all(Radius.circular(6.0)),

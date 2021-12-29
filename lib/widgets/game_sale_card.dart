@@ -1,32 +1,52 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:game_sale/constants/game_genre.dart';
 import 'package:game_sale/constants/game_platform.dart';
 import 'package:game_sale/generated/l10n.dart';
 import 'package:game_sale/widgets/platform_tag.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
+/// ゲームセール用のカードを作成
 class GameSaleCard extends HookConsumerWidget {
-  const GameSaleCard(
-      {Key? key,
-      required this.packageImage,
-      required this.title,
-      required this.genre,
-      required this.platform,
-      required this.basePrice,
-      required this.salePrice,
-      required this.discountPercent,
-      required this.discountedUntil,
-      required this.now})
-      : super(key: key);
+  const GameSaleCard({
+    Key? key,
+    required this.coverArt,
+    required this.name,
+    required this.genre,
+    required this.platform,
+    required this.basePrice,
+    required this.salePrice,
+    required this.discountPercent,
+    required this.discountedUntil,
+    required this.now,
+  }) : super(key: key);
 
-  final String packageImage;
-  final String title;
-  final String genre;
-  final GamePlatform platform;
+  /// ゲームのパッケージ画像url
+  final String coverArt;
+
+  /// ゲームの名称
+  final String name;
+
+  /// ゲームのジャンル
+  final List<String> genre;
+
+  /// ゲームのプラットフォーム
+  final String platform;
+
+  /// ゲームの価格
   final int basePrice;
+
+  /// ゲームのセール価格
   final int salePrice;
+
+  /// ゲームのセールパーセンテージ
   final int discountPercent;
-  final DateTime discountedUntil;
+
+  /// ゲームのセール期限
+  final String discountedUntil;
+
+  /// 現在日付
   final DateTime now;
 
   @override
@@ -44,7 +64,7 @@ class GameSaleCard extends HookConsumerWidget {
                 borderRadius: BorderRadius.circular(6.0),
                 child: Image(
                   width: 110.0,
-                  image: AssetImage(packageImage),
+                  image: CachedNetworkImageProvider(coverArt),
                 ),
               ),
               Expanded(
@@ -61,7 +81,7 @@ class GameSaleCard extends HookConsumerWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  title,
+                                  name,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(
@@ -69,7 +89,13 @@ class GameSaleCard extends HookConsumerWidget {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  genre,
+                                  genre
+                                      .map((genre) => GameGenre.values
+                                          .firstWhere((gameGenre) =>
+                                              gameGenre.key == genre)
+                                          .value)
+                                      .toList()
+                                      .join(' / '),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(
@@ -80,7 +106,11 @@ class GameSaleCard extends HookConsumerWidget {
                               ],
                             ),
                           ),
-                          PlatformTag(platform: platform),
+                          PlatformTag(
+                            platform: GamePlatform.values.firstWhere(
+                                (gamePlatform) =>
+                                    gamePlatform.value == platform),
+                          ),
                         ],
                       ),
                       Expanded(
@@ -141,7 +171,7 @@ class GameSaleCard extends HookConsumerWidget {
                                     const TextSpan(text: '\n'),
                                     TextSpan(
                                       text: S.of(context).daysLeft(
-                                          discountedUntil
+                                          DateTime.parse(discountedUntil)
                                               .difference(now)
                                               .inDays),
                                       style: const TextStyle(fontSize: 8.0),
