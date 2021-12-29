@@ -3,21 +3,21 @@ import 'package:game_sale/constants/local_storage_key.dart';
 import 'package:game_sale/utils/local_storage.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-/// テーマ選択のProviderです。
+/// テーマ選択のProvider
 final themeSelectorProvider =
     StateNotifierProvider<ThemeSelectorStateNotifier, ThemeMode>(
         (ref) => ThemeSelectorStateNotifier());
 
-/// テーマの変更・保存を行うStateNotifierです。
+/// テーマの変更・保存を行うStateNotifier
 class ThemeSelectorStateNotifier extends StateNotifier<ThemeMode> {
   ThemeSelectorStateNotifier() : super(ThemeMode.system) {
     init();
   }
 
-  /// ストレージ保存のインスタンスを作成します。
+  /// ストレージ保存のインスタンスを作成
   final localStorage = LocalStorage();
 
-  /// 選択されたテーマの保存があれば取得して反映します。
+  /// 選択されたテーマの保存があれば取得して反映
   void init() async {
     final themeIndex = await localStorage.getStorage(LocalStorageKey.themeMode);
     if (themeIndex != null) {
@@ -28,7 +28,7 @@ class ThemeSelectorStateNotifier extends StateNotifier<ThemeMode> {
     }
   }
 
-  /// テーマの変更を行い、選択された[themeMode]をストレージに保存します。
+  /// テーマの変更を行い、選択された[themeMode]をストレージに保存
   void change(ThemeMode themeMode) async {
     await localStorage.setStorage(LocalStorageKey.themeMode, themeMode.index);
     state = themeMode;
