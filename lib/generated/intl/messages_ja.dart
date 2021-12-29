@@ -50,12 +50,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("メールアドレス"),
         "emailAlreadyInUse":
             MessageLookupByLibrary.simpleMessage("メールアドレスは既に使われています。"),
+        "favorite": MessageLookupByLibrary.simpleMessage("気に入り"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("パスワードを忘れた?"),
         "forgotPasswordMessage": MessageLookupByLibrary.simpleMessage(
             "メールアドレスを入力すると、パスワードリセットのリンクが送信されます"),
-        "fps": MessageLookupByLibrary.simpleMessage("ファーストパーソン・シューティング"),
         "ftg": MessageLookupByLibrary.simpleMessage("対戦型格闘"),
         "game": MessageLookupByLibrary.simpleMessage("ゲーム"),
+        "gameDetail": MessageLookupByLibrary.simpleMessage("ゲーム詳細"),
+        "gameInfo": MessageLookupByLibrary.simpleMessage("ゲーム情報"),
         "genre": MessageLookupByLibrary.simpleMessage("ジャンル"),
         "invalidEmail": MessageLookupByLibrary.simpleMessage("無効なメールアドレス"),
         "languages": MessageLookupByLibrary.simpleMessage("言語"),
@@ -63,6 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lightDescription":
             MessageLookupByLibrary.simpleMessage("白を基調とした明るいテーマ"),
         "name": MessageLookupByLibrary.simpleMessage("名称"),
+        "noResults": MessageLookupByLibrary.simpleMessage("一致する結果が見つかりません。"),
         "password": MessageLookupByLibrary.simpleMessage("パスワード"),
         "passwordDigit":
             MessageLookupByLibrary.simpleMessage("1つの数字を含む必要があります"),
@@ -91,6 +94,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "rpg": MessageLookupByLibrary.simpleMessage("ロールプレイング"),
         "salePriceSort": MessageLookupByLibrary.simpleMessage("セール価格で並び替え"),
         "searchFilter": MessageLookupByLibrary.simpleMessage("検索フィルター"),
+        "searchMessage":
+            MessageLookupByLibrary.simpleMessage("ゲームのフルネームで検索します"),
         "sendingFailed": MessageLookupByLibrary.simpleMessage("メール送信に失敗しました。"),
         "sendingSuccess": MessageLookupByLibrary.simpleMessage("メール送信に成功しました。"),
         "settings": MessageLookupByLibrary.simpleMessage("設定"),
@@ -105,7 +110,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "systemDescription":
             MessageLookupByLibrary.simpleMessage("端末のシステム設定に追従"),
         "theme": MessageLookupByLibrary.simpleMessage("テーマ"),
-        "tps": MessageLookupByLibrary.simpleMessage("サードパーソン・シューティング"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("ユーザが存在しません。"),
         "voice": MessageLookupByLibrary.simpleMessage("音声")
       };

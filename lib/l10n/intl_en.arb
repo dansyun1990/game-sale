@@ -30,6 +30,7 @@
   "userNotFound": "User not found.",
   "sendingFailed": "Failed to send email.",
   "settings": "Settings",
+  "favorite": "Favorite",
   "theme": "Theme",
   "system": "System",
   "light": "Light",
@@ -43,7 +44,6 @@
   "release": "Coming soon",
   "act": "Action",
   "adv": "Adventure",
-  "fps": "First-person shooter",
   "ftg": "Fighting",
   "pzl": "Puzzle",
   "rcg": "Racing",
@@ -51,7 +51,6 @@
   "slg": "Simulation",
   "spg": "Sports",
   "stg": "Shooter",
-  "tps": "Third-person shooter",
   "genre": "Genre",
   "priceUndecided": "Price undecided",
   "releaseUndecided": "Release undecided",
@@ -67,5 +66,9 @@
   "releaseDate": "Release",
   "voice": "Voice",
   "languages": "Languages",
-  "desc": "Description"
+  "desc": "Description",
+  "gameDetail": "Game detail",
+  "gameInfo": "Game info",
+  "noResults": "No matching results found.",
+  "searchMessage": "Search by full name of the game"
 }

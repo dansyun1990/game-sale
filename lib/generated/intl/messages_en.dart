@@ -53,13 +53,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
             "The account already exists for that email."),
+        "favorite": MessageLookupByLibrary.simpleMessage("Favorite"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password?"),
         "forgotPasswordMessage": MessageLookupByLibrary.simpleMessage(
             "Provide your email and we will send you a link to reset your password"),
-        "fps": MessageLookupByLibrary.simpleMessage("First-person shooter"),
         "ftg": MessageLookupByLibrary.simpleMessage("Fighting"),
         "game": MessageLookupByLibrary.simpleMessage("Game"),
+        "gameDetail": MessageLookupByLibrary.simpleMessage("Game detail"),
+        "gameInfo": MessageLookupByLibrary.simpleMessage("Game info"),
         "genre": MessageLookupByLibrary.simpleMessage("Genre"),
         "invalidEmail":
             MessageLookupByLibrary.simpleMessage("Invalid email address"),
@@ -68,6 +70,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lightDescription":
             MessageLookupByLibrary.simpleMessage("Light theme based on white"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
+        "noResults":
+            MessageLookupByLibrary.simpleMessage("No matching results found."),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordDigit": MessageLookupByLibrary.simpleMessage(
             "Should contain at least one digit"),
@@ -101,6 +105,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "salePriceSort":
             MessageLookupByLibrary.simpleMessage("Sort by sale price"),
         "searchFilter": MessageLookupByLibrary.simpleMessage("Search filter"),
+        "searchMessage": MessageLookupByLibrary.simpleMessage(
+            "Search by full name of the game"),
         "sendingFailed":
             MessageLookupByLibrary.simpleMessage("Failed to send email."),
         "sendingSuccess": MessageLookupByLibrary.simpleMessage(
@@ -117,7 +123,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "systemDescription":
             MessageLookupByLibrary.simpleMessage("Follow the system settings"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
-        "tps": MessageLookupByLibrary.simpleMessage("Third-person shooter"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("User not found."),
         "voice": MessageLookupByLibrary.simpleMessage("Voice")
       };

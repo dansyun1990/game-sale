@@ -350,6 +350,16 @@ class S {
     );
   }
 
+  /// `Favorite`
+  String get favorite {
+    return Intl.message(
+      'Favorite',
+      name: 'favorite',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Theme`
   String get theme {
     return Intl.message(
@@ -480,16 +490,6 @@ class S {
     );
   }
 
-  /// `First-person shooter`
-  String get fps {
-    return Intl.message(
-      'First-person shooter',
-      name: 'fps',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Fighting`
   String get ftg {
     return Intl.message(
@@ -555,16 +555,6 @@ class S {
     return Intl.message(
       'Shooter',
       name: 'stg',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Third-person shooter`
-  String get tps {
-    return Intl.message(
-      'Third-person shooter',
-      name: 'tps',
       desc: '',
       args: [],
     );
@@ -725,6 +715,46 @@ class S {
     return Intl.message(
       'Description',
       name: 'desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Game detail`
+  String get gameDetail {
+    return Intl.message(
+      'Game detail',
+      name: 'gameDetail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Game info`
+  String get gameInfo {
+    return Intl.message(
+      'Game info',
+      name: 'gameInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No matching results found.`
+  String get noResults {
+    return Intl.message(
+      'No matching results found.',
+      name: 'noResults',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search by full name of the game`
+  String get searchMessage {
+    return Intl.message(
+      'Search by full name of the game',
+      name: 'searchMessage',
       desc: '',
       args: [],
     );
