@@ -1,13 +1,16 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:game_sale/models/game.dart';
 
-part 'games.freezed.dart';
+import 'favorite.dart';
+
+part 'favorites.freezed.dart';
 
 @freezed
-class Games with _$Games {
-  const factory Games({
+class Favorites with _$Favorites {
+  const factory Favorites({
     required List<Game> games,
+    required List<Favorite> favorites,
     @Default(false) bool isLoading,
     @Default(false) bool hasMore,
-  }) = _Games;
+  }) = _Favorites;
 }

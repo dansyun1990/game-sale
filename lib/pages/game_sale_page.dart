@@ -7,8 +7,6 @@ import 'package:game_sale/widgets/game_sale_card.dart';
 import 'package:game_sale/widgets/sort_button.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'game/game_info_page.dart';
-
 /// ゲームセールページを作成
 class GameSalePage extends HookConsumerWidget {
   const GameSalePage({Key? key}) : super(key: key);
@@ -53,43 +51,12 @@ class GameSalePage extends HookConsumerWidget {
                 (context, index) {
                   final games = gamesState.games;
                   if (index < games.length) {
-                    final game = games.elementAt(index);
-
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute<bool>(
-                            builder: (BuildContext context) => GameInfoPage(
-                              id: game.id!,
-                              name: game.name,
-                              platform: game.platform,
-                              subName: game.subName,
-                              releaseDate: game.releaseDate,
-                              size: game.size,
-                              genre: game.genre,
-                              rating: game.rating,
-                              desc: game.desc,
-                              screenshot: game.screenshot,
-                              developer: game.developer,
-                              publisher: game.publisher,
-                              voice: game.voice,
-                              languages: game.languages,
-                            ),
-                          ),
-                        );
-                      },
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6.0, vertical: 2.0),
                       child: GameSaleCard(
                         key: UniqueKey(),
-                        coverArt: game.coverArt,
-                        name: game.name,
-                        genre: game.genre,
-                        platform: game.platform,
-                        basePrice: game.basePrice,
-                        salePrice: game.salePrice,
-                        discountPercent: game.discountPercent,
-                        discountedUntil: game.discountedUntil,
-                        now: DateTime.now(),
+                        game: games.elementAt(index),
                       ),
                     );
                   } else if (gamesState.hasMore) {

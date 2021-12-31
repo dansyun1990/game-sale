@@ -30,7 +30,7 @@
   "userNotFound": "ユーザが存在しません。",
   "sendingFailed": "メール送信に失敗しました。",
   "settings": "設定",
-  "favorite": "気に入り",
+  "favorite": "お気に入り",
   "theme": "テーマ",
   "system": "システム",
   "light": "ライト",
@@ -70,5 +70,11 @@
   "gameDetail": "ゲーム詳細",
   "gameInfo": "ゲーム情報",
   "noResults": "一致する結果が見つかりません。",
-  "searchMessage": "ゲームのフルネームで検索します"
+  "searchMessage": "ゲームのフルネームで検索します",
+  "notificationOff": "通知オフ",
+  "priceFluctuation": "価格変動通知",
+  "lowestPrice": "最低価格更新通知",
+  "cancel": "キャンセル",
+  "remove": "削除",
+  "numberOfGames": "ゲーム数"
 }

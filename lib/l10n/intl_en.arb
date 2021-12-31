@@ -70,5 +70,11 @@
   "gameDetail": "Game detail",
   "gameInfo": "Game info",
   "noResults": "No matching results found.",
-  "searchMessage": "Search by full name of the game"
+  "searchMessage": "Search by full name of the game",
+  "notificationOff": "Notification off",
+  "priceFluctuation": "Notify price fluctuations",
+  "lowestPrice": "Notify lowest price",
+  "cancel": "Cancel",
+  "remove": "Remove",
+  "numberOfGames": "Number of games"
 }

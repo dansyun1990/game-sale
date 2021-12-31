@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:game_sale/constants/game_genre.dart';
 import 'package:game_sale/constants/game_platform.dart';
 import 'package:game_sale/generated/l10n.dart';
+import 'package:game_sale/models/game.dart';
+import 'package:game_sale/pages/game/game_info_page.dart';
 import 'package:game_sale/widgets/platform_tag.dart';
 import 'package:intl/intl.dart';
 
@@ -10,48 +12,30 @@ import 'package:intl/intl.dart';
 class GameSaleCard extends StatelessWidget {
   const GameSaleCard({
     Key? key,
-    required this.coverArt,
-    required this.name,
-    required this.genre,
-    required this.platform,
-    required this.basePrice,
-    required this.salePrice,
-    required this.discountPercent,
-    required this.discountedUntil,
-    required this.now,
+    required this.game,
+    this.favoriteFlag = false,
   }) : super(key: key);
 
-  /// ゲームのパッケージ画像url
-  final String coverArt;
+  /// ゲーム情報
+  final Game game;
 
-  /// ゲームの名称
-  final String name;
-
-  /// ゲームのジャンル
-  final List<String> genre;
-
-  /// ゲームのプラットフォーム
-  final String platform;
-
-  /// ゲームの価格
-  final int basePrice;
-
-  /// ゲームのセール価格
-  final int salePrice;
-
-  /// ゲームのセールパーセンテージ
-  final int discountPercent;
-
-  /// ゲームのセール期限
-  final String discountedUntil;
-
-  /// 現在日付
-  final DateTime now;
+  /// お気に入りから遷移した場合のフラグ
+  final bool? favoriteFlag;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute<bool>(
+            builder: (BuildContext context) => GameInfoPage(
+              game: game,
+              favoriteFlag: favoriteFlag,
+            ),
+          ),
+        );
+      },
       child: Card(
         elevation: 0.0,
         child: SizedBox(
@@ -63,7 +47,7 @@ class GameSaleCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(6.0),
                 child: Image(
                   width: 110.0,
-                  image: CachedNetworkImageProvider(coverArt),
+                  image: CachedNetworkImageProvider(game.coverArt),
                 ),
               ),
               Expanded(
@@ -80,7 +64,7 @@ class GameSaleCard extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  name,
+                                  game.name,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(
@@ -88,7 +72,7 @@ class GameSaleCard extends StatelessWidget {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  genre
+                                  game.genre
                                       .map((genre) => GameGenre.values
                                           .firstWhere((gameGenre) =>
                                               gameGenre.key == genre)
@@ -108,7 +92,7 @@ class GameSaleCard extends StatelessWidget {
                           PlatformTag(
                             platform: GamePlatform.values.firstWhere(
                                 (gamePlatform) =>
-                                    gamePlatform.value == platform),
+                                    gamePlatform.value == game.platform),
                           ),
                         ],
                       ),
@@ -123,7 +107,7 @@ class GameSaleCard extends StatelessWidget {
                                     TextSpan(
                                       text: NumberFormat.simpleCurrency(
                                               locale: 'ja')
-                                          .format(salePrice),
+                                          .format(game.salePrice),
                                       style: const TextStyle(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.bold,
@@ -136,7 +120,7 @@ class GameSaleCard extends StatelessWidget {
                                         child: Text(
                                           NumberFormat.simpleCurrency(
                                                   locale: 'ja')
-                                              .format(basePrice),
+                                              .format(game.basePrice),
                                           style: const TextStyle(
                                             fontSize: 9.0,
                                             color: Colors.grey,
@@ -161,7 +145,7 @@ class GameSaleCard extends StatelessWidget {
                                 text: TextSpan(
                                   children: [
                                     TextSpan(
-                                      text: '-$discountPercent%',
+                                      text: '-${game.discountPercent}%',
                                       style: const TextStyle(
                                         fontSize: 13.0,
                                         fontWeight: FontWeight.bold,
@@ -170,8 +154,8 @@ class GameSaleCard extends StatelessWidget {
                                     const TextSpan(text: '\n'),
                                     TextSpan(
                                       text: S.of(context).daysLeft(
-                                          DateTime.parse(discountedUntil)
-                                              .difference(now)
+                                          DateTime.parse(game.discountedUntil)
+                                              .difference(DateTime.now())
                                               .inDays),
                                       style: const TextStyle(fontSize: 8.0),
                                     ),
