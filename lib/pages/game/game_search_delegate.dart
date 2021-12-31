@@ -54,17 +54,13 @@ class GameSearchDelegate extends SearchDelegate {
               itemCount: games.length,
               itemBuilder: (context, index) {
                 final game = games.elementAt(index);
-                return GameSaleCard(
-                  key: UniqueKey(),
-                  coverArt: game.coverArt,
-                  name: game.name,
-                  genre: game.genre,
-                  platform: game.platform,
-                  basePrice: game.basePrice,
-                  salePrice: game.salePrice,
-                  discountPercent: game.discountPercent,
-                  discountedUntil: game.discountedUntil,
-                  now: DateTime.now(),
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 6.0, vertical: 2.0),
+                  child: GameSaleCard(
+                    key: UniqueKey(),
+                    game: game,
+                  ),
                 );
               },
             );

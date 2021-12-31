@@ -3,9 +3,12 @@ import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 import 'package:game_sale/constants/languages.dart';
 import 'package:game_sale/extension/theme_mode_extension.dart';
 import 'package:game_sale/generated/l10n.dart';
+import 'package:game_sale/models/favorites.dart';
 import 'package:game_sale/pages/settings/favorite_page.dart';
 import 'package:game_sale/pages/settings/language_page.dart';
 import 'package:game_sale/pages/settings/theme_page.dart';
+import 'package:game_sale/providers/auth_provider.dart';
+import 'package:game_sale/providers/favorite_provider.dart';
 import 'package:game_sale/providers/language_selector_provider.dart';
 import 'package:game_sale/providers/theme_selector_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -16,6 +19,14 @@ class SettingsPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final auth = ref.watch(authProvider);
+    Favorites? favorites;
+
+    // ログインした場合のみ、お気に入り一覧を取得
+    if (auth.user != null) {
+      favorites = ref.watch(favoriteProvider);
+    }
+
     return SettingsList(
       backgroundColor: Theme.of(context).canvasColor,
       shrinkWrap: true,
@@ -25,11 +36,18 @@ class SettingsPage extends HookConsumerWidget {
           tiles: [
             SettingsTile(
               title: S.of(context).favorite,
+              subtitle: favorites != null
+                  ? S.of(context).numberOfGames +
+                      '：' +
+                      favorites.favorites.length.toString()
+                  : null,
               leading: const Icon(Icons.favorite),
-              onPressed: (BuildContext context) {
+              onPressed: (BuildContext context) async {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const FavoritePage()),
+                  MaterialPageRoute(
+                    builder: (_) => FavoritePage(favorites: favorites),
+                  ),
                 );
               },
             ),

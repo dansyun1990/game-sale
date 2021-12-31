@@ -95,7 +95,6 @@ class RegisterPage extends HookWidget {
       await FirebaseFirestore.instance.collection('users').doc(user!.uid).set({
         'userName': 'userName',
         'email': email,
-        'favorites': [],
         'createdAt': Timestamp.now(),
       });
       var count = 0;

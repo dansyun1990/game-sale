@@ -759,6 +759,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Notification off`
+  String get notificationOff {
+    return Intl.message(
+      'Notification off',
+      name: 'notificationOff',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notify price fluctuations`
+  String get priceFluctuation {
+    return Intl.message(
+      'Notify price fluctuations',
+      name: 'priceFluctuation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notify lowest price`
+  String get lowestPrice {
+    return Intl.message(
+      'Notify lowest price',
+      name: 'lowestPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove`
+  String get remove {
+    return Intl.message(
+      'Remove',
+      name: 'remove',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number of games`
+  String get numberOfGames {
+    return Intl.message(
+      'Number of games',
+      name: 'numberOfGames',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

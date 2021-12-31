@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "authenticationFailed": MessageLookupByLibrary.simpleMessage(
             "入力したメールアドレスまたはパスワードに誤りがあります。"),
         "basicInfo": MessageLookupByLibrary.simpleMessage("基本情報"),
+        "cancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
         "comingSoon": MessageLookupByLibrary.simpleMessage("まもなく発売"),
         "confirmPassword": MessageLookupByLibrary.simpleMessage("パスワード確認"),
         "createUserFailed":
@@ -50,7 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("メールアドレス"),
         "emailAlreadyInUse":
             MessageLookupByLibrary.simpleMessage("メールアドレスは既に使われています。"),
-        "favorite": MessageLookupByLibrary.simpleMessage("気に入り"),
+        "favorite": MessageLookupByLibrary.simpleMessage("お気に入り"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("パスワードを忘れた?"),
         "forgotPasswordMessage": MessageLookupByLibrary.simpleMessage(
             "メールアドレスを入力すると、パスワードリセットのリンクが送信されます"),
@@ -64,8 +65,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "light": MessageLookupByLibrary.simpleMessage("ライト"),
         "lightDescription":
             MessageLookupByLibrary.simpleMessage("白を基調とした明るいテーマ"),
+        "lowestPrice": MessageLookupByLibrary.simpleMessage("最低価格更新通知"),
         "name": MessageLookupByLibrary.simpleMessage("名称"),
         "noResults": MessageLookupByLibrary.simpleMessage("一致する結果が見つかりません。"),
+        "notificationOff": MessageLookupByLibrary.simpleMessage("通知オフ"),
+        "numberOfGames": MessageLookupByLibrary.simpleMessage("ゲーム数"),
         "password": MessageLookupByLibrary.simpleMessage("パスワード"),
         "passwordDigit":
             MessageLookupByLibrary.simpleMessage("1つの数字を含む必要があります"),
@@ -81,6 +85,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordUppercase":
             MessageLookupByLibrary.simpleMessage("1つの英大文字を含む必要があります"),
         "platform": MessageLookupByLibrary.simpleMessage("プラットフォーム"),
+        "priceFluctuation": MessageLookupByLibrary.simpleMessage("価格変動通知"),
         "priceUndecided": MessageLookupByLibrary.simpleMessage("価格未定"),
         "publisher": MessageLookupByLibrary.simpleMessage("発売元"),
         "pzl": MessageLookupByLibrary.simpleMessage("パズル"),
@@ -89,6 +94,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "releaseDate": MessageLookupByLibrary.simpleMessage("発売日"),
         "releaseDateSort": MessageLookupByLibrary.simpleMessage("リリース日で並び替え"),
         "releaseUndecided": MessageLookupByLibrary.simpleMessage("発売日未定"),
+        "remove": MessageLookupByLibrary.simpleMessage("削除"),
         "required": m2,
         "resetPassword": MessageLookupByLibrary.simpleMessage("パスワード再設定"),
         "rpg": MessageLookupByLibrary.simpleMessage("ロールプレイング"),

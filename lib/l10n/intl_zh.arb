@@ -70,5 +70,11 @@
   "gameDetail": "游戏详情",
   "gameInfo": "游戏情报",
   "noResults": "没有检索到一致的结果。",
-  "searchMessage": "用游戏的全名进行检索"
+  "searchMessage": "用游戏的全名进行检索",
+  "notificationOff": "通知关闭",
+  "priceFluctuation": "价格变动通知",
+  "lowestPrice": "最低价格更新通知",
+  "cancel": "取消",
+  "remove": "移除",
+  "numberOfGames": "游戏数量"
 }

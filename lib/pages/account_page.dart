@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:game_sale/generated/l10n.dart';
-
-import 'account/sign_in_page.dart';
+import 'package:game_sale/widgets/sign_in_button.dart';
 
 /// アカウントページを作成
 class AccountPage extends StatelessWidget {
@@ -44,13 +43,7 @@ class AccountPage extends StatelessWidget {
                 width: 88.0,
               ),
             ),
-            TextButton(
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => SignInPage()),
-              ),
-              child: Text(S.of(context).signInMessage),
-            ),
+            const SignInButton(),
           ],
         );
       },

@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "authenticationFailed": MessageLookupByLibrary.simpleMessage(
             "The password is incorrect or the email cannot be recognized."),
         "basicInfo": MessageLookupByLibrary.simpleMessage("Basic info"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "comingSoon": MessageLookupByLibrary.simpleMessage("Coming soon"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
@@ -69,9 +70,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "light": MessageLookupByLibrary.simpleMessage("Light"),
         "lightDescription":
             MessageLookupByLibrary.simpleMessage("Light theme based on white"),
+        "lowestPrice":
+            MessageLookupByLibrary.simpleMessage("Notify lowest price"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "noResults":
             MessageLookupByLibrary.simpleMessage("No matching results found."),
+        "notificationOff":
+            MessageLookupByLibrary.simpleMessage("Notification off"),
+        "numberOfGames":
+            MessageLookupByLibrary.simpleMessage("Number of games"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordDigit": MessageLookupByLibrary.simpleMessage(
             "Should contain at least one digit"),
@@ -88,6 +95,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordUppercase": MessageLookupByLibrary.simpleMessage(
             "Should contain at least one uppercase"),
         "platform": MessageLookupByLibrary.simpleMessage("Platform"),
+        "priceFluctuation":
+            MessageLookupByLibrary.simpleMessage("Notify price fluctuations"),
         "priceUndecided":
             MessageLookupByLibrary.simpleMessage("Price undecided"),
         "publisher": MessageLookupByLibrary.simpleMessage("Publisher"),
@@ -99,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sort by release date"),
         "releaseUndecided":
             MessageLookupByLibrary.simpleMessage("Release undecided"),
+        "remove": MessageLookupByLibrary.simpleMessage("Remove"),
         "required": m2,
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset password"),
         "rpg": MessageLookupByLibrary.simpleMessage("Role-playing"),
