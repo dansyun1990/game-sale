@@ -6,6 +6,7 @@ import 'package:game_sale/constants/game_genre.dart';
 import 'package:game_sale/constants/game_platform.dart';
 import 'package:game_sale/models/chart.dart';
 import 'package:game_sale/models/game.dart';
+import 'package:game_sale/models/review.dart';
 import 'package:game_sale/models/sale_history.dart';
 import 'package:game_sale/pages/game/game_info_page.dart';
 import 'package:game_sale/utils/util.dart';
@@ -26,7 +27,7 @@ class GameSaleCard extends StatelessWidget {
   final Game game;
 
   /// お気に入りから遷移した場合のフラグ
-  final bool? favoriteFlag;
+  final bool favoriteFlag;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,8 @@ class GameSaleCard extends StatelessWidget {
 
         final minPrice =
             saleHistory.reduce((a, b) => a.price < b.price ? a : b).price;
+
+        final reviews = await getReviews(game.id!);
 
         final chartDate = [
           charts.Series<Chart, DateTime>(
@@ -58,6 +61,7 @@ class GameSaleCard extends StatelessWidget {
               favoriteFlag: favoriteFlag,
               chartData: chartDate,
               minPrice: minPrice,
+              reviews: reviews,
             ),
           ),
         );
@@ -201,5 +205,21 @@ class GameSaleCard extends StatelessWidget {
       chartList.add(Chart(DateTime.now(), basePrice));
     }
     return chartList;
+  }
+
+  Future<List<Review>> getReviews(String gameId) async {
+    final snapshots = await FirebaseFirestore.instance
+        .collection('games')
+        .doc(gameId)
+        .collection('reviews')
+        .limit(5)
+        .orderBy('createdAt', descending: true)
+        .withConverter<Review>(
+          fromFirestore: (snapshot, _) => Review.fromDocumentSnapshot(snapshot),
+          toFirestore: (obj, _) => obj.toJson(),
+        )
+        .get();
+
+    return snapshots.docs.map((doc) => doc.data()).toList();
   }
 }
