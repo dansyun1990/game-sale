@@ -9,6 +9,7 @@ import 'package:game_sale/constants/notification_type.dart';
 import 'package:game_sale/generated/l10n.dart';
 import 'package:game_sale/models/chart.dart';
 import 'package:game_sale/models/game.dart';
+import 'package:game_sale/models/review.dart';
 import 'package:game_sale/models/user.dart';
 import 'package:game_sale/pages/settings/favorite_page.dart';
 import 'package:game_sale/providers/auth_provider.dart';
@@ -16,6 +17,7 @@ import 'package:game_sale/providers/favorite_provider.dart';
 import 'package:game_sale/widgets/card_tag.dart';
 import 'package:game_sale/widgets/discount_chip.dart';
 import 'package:game_sale/widgets/platform_tag.dart';
+import 'package:game_sale/widgets/review_card.dart';
 import 'package:game_sale/widgets/sale_history_chart.dart';
 import 'package:game_sale/widgets/sale_price_text.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -23,6 +25,7 @@ import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'game_detail_page.dart';
+import 'game_review_page.dart';
 
 /// ゲーム情報ページを作成
 class GameInfoPage extends HookConsumerWidget {
@@ -32,18 +35,20 @@ class GameInfoPage extends HookConsumerWidget {
     this.favoriteFlag = false,
     required this.chartData,
     required this.minPrice,
+    required this.reviews,
   }) : super(key: key);
 
   final Game game;
-  final bool? favoriteFlag;
+  final bool favoriteFlag;
   final List<charts.Series<Chart, DateTime>> chartData;
   final int minPrice;
+  final List<Review> reviews;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return WillPopScope(
       onWillPop: () async {
-        if (favoriteFlag!) {
+        if (favoriteFlag) {
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -72,7 +77,7 @@ class GameInfoPage extends HookConsumerWidget {
                 chartData: chartData,
               ),
               const SizedBox(height: 8.0),
-              GameReview(),
+              GameReview(gameId: game.id!, reviews: reviews),
               const SizedBox(height: 32.0),
             ],
           ),
@@ -106,7 +111,7 @@ class GameInfoPage extends HookConsumerWidget {
                         color: Theme.of(context).primaryColor,
                         onPressed: () async {
                           if (!snapshot.data!) {
-                            if (favoriteFlag!) {
+                            if (favoriteFlag) {
                               await ref
                                   .read(favoriteProvider.notifier)
                                   .addFavorite(game.id!);
@@ -116,7 +121,7 @@ class GameInfoPage extends HookConsumerWidget {
                             }
                             ref.refresh(authProvider);
                           } else {
-                            if (favoriteFlag!) {
+                            if (favoriteFlag) {
                               await ref
                                   .read(favoriteProvider.notifier)
                                   .deleteFavorite(game.id!);
@@ -172,7 +177,17 @@ class GameInfoPage extends HookConsumerWidget {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton.extended(
           icon: const Icon(Icons.add_comment),
-          onPressed: () async {},
+          onPressed: () async {
+            Navigator.push(
+              context,
+              MaterialPageRoute<bool>(
+                builder: (BuildContext context) => GameReviewPage(
+                  name: game.name,
+                  subName: game.subName,
+                ),
+              ),
+            );
+          },
           label: Text('レビュー'),
         ),
       ),
@@ -486,7 +501,11 @@ class GamePrice extends StatelessWidget {
 }
 
 class GameReview extends StatelessWidget {
-  const GameReview({Key? key}) : super(key: key);
+  const GameReview({Key? key, required this.gameId, required this.reviews})
+      : super(key: key);
+
+  final String gameId;
+  final List<Review> reviews;
 
   @override
   Widget build(BuildContext context) {
@@ -502,167 +521,53 @@ class GameReview extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    '人気レビュー',
-                    style: TextStyle(
+                    S.of(context).newReviews,
+                    style: const TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Spacer(),
-                  const Icon(
-                    Icons.arrow_forward_ios,
-                    size: 16.0,
-                    color: Colors.black54,
-                  ),
                 ],
               ),
             ),
-            SizedBox(height: 8.0),
-            Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Image.asset(
-                    'assets/images/avatar.png',
-                    width: 30,
-                    height: 30,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 6),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '木下藤吉郎',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
+            const SizedBox(height: 8.0),
+            ListView.builder(
+                key: UniqueKey(),
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: reviews.length,
+                itemBuilder: (context, index) {
+                  return ReviewCard(
+                    gameId: gameId,
+                    review: reviews.elementAt(index),
+                  );
+                }),
+            reviews.isNotEmpty
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          S.of(context).seeAllReviews,
+                          style: const TextStyle(
+                            fontSize: 12.0,
+                            color: Colors.blue,
+                          ),
                         ),
-                      ),
-                      Text(
-                        '2021-10-01 10:00',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: Colors.grey,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Spacer(),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.thumb_up_outlined,
-                      size: 16,
-                      color: Colors.deepPurpleAccent,
+                        const Icon(
+                          Icons.arrow_forward_ios,
+                          size: 10.0,
+                          color: Colors.blue,
+                        )
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 3.0),
-                      child: Text(
-                        '0',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    )
-                  ],
-                )
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 4.0),
-              child: Text(
-                'これゲーム最高です。',
-                style: TextStyle(fontSize: 14, color: Colors.black54),
-              ),
-            ),
-            Divider(),
-            Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Image.asset(
-                    'assets/images/avatar.png',
-                    width: 30,
-                    height: 30,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 6),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '木下藤吉郎',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        '2021-10-01 10:00',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: Colors.grey,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Spacer(),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.thumb_up_outlined,
-                      size: 16,
-                      color: Colors.deepPurpleAccent,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 3.0),
-                      child: Text(
-                        '0',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    )
-                  ],
-                )
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 4.0),
-              child: Text(
-                'これゲーム最高です。',
-                style: TextStyle(fontSize: 14, color: Colors.black54),
-              ),
-            ),
-            Divider(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Row(
-                children: [
-                  Text(
-                    'レビューを全部見る',
-                    style: TextStyle(
-                      fontSize: 12.0,
-                      color: Colors.blue,
-                    ),
-                  ),
-                  const Icon(
-                    Icons.arrow_forward_ios,
-                    size: 10.0,
-                    color: Colors.blue,
                   )
-                ],
-              ),
-            ),
+                : const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16.0),
+                    child: Center(
+                      child: Text('レビューがまだありません。'),
+                    ),
+                  ),
           ],
         ),
       ),
