@@ -36,11 +36,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "authenticationFailed": MessageLookupByLibrary.simpleMessage(
             "入力したメールアドレスまたはパスワードに誤りがあります。"),
         "basicInfo": MessageLookupByLibrary.simpleMessage("基本情報"),
+        "bestPrice": MessageLookupByLibrary.simpleMessage("最安値"),
         "cancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
         "comingSoon": MessageLookupByLibrary.simpleMessage("まもなく発売"),
         "confirmPassword": MessageLookupByLibrary.simpleMessage("パスワード確認"),
         "createUserFailed":
             MessageLookupByLibrary.simpleMessage("ユーザ作成に失敗しました。"),
+        "currentPrice": MessageLookupByLibrary.simpleMessage("現在の価格"),
         "dark": MessageLookupByLibrary.simpleMessage("ダーク"),
         "darkDescription": MessageLookupByLibrary.simpleMessage("黒を基調とした暗いテーマ"),
         "daysLeft": m0,
@@ -48,6 +50,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "deals": MessageLookupByLibrary.simpleMessage("セール"),
         "desc": MessageLookupByLibrary.simpleMessage("説明"),
         "developer": MessageLookupByLibrary.simpleMessage("開発元"),
+        "digitalEditionPrice":
+            MessageLookupByLibrary.simpleMessage("デジタルエディション価格"),
         "email": MessageLookupByLibrary.simpleMessage("メールアドレス"),
         "emailAlreadyInUse":
             MessageLookupByLibrary.simpleMessage("メールアドレスは既に使われています。"),
@@ -85,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordUppercase":
             MessageLookupByLibrary.simpleMessage("1つの英大文字を含む必要があります"),
         "platform": MessageLookupByLibrary.simpleMessage("プラットフォーム"),
+        "price": MessageLookupByLibrary.simpleMessage("価格"),
         "priceFluctuation": MessageLookupByLibrary.simpleMessage("価格変動通知"),
         "priceUndecided": MessageLookupByLibrary.simpleMessage("価格未定"),
         "publisher": MessageLookupByLibrary.simpleMessage("発売元"),

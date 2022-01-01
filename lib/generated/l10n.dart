@@ -819,6 +819,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Digital edition price`
+  String get digitalEditionPrice {
+    return Intl.message(
+      'Digital edition price',
+      name: 'digitalEditionPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Best price`
+  String get bestPrice {
+    return Intl.message(
+      'Best price',
+      name: 'bestPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current price`
+  String get currentPrice {
+    return Intl.message(
+      'Current price',
+      name: 'currentPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price`
+  String get price {
+    return Intl.message(
+      'Price',
+      name: 'price',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

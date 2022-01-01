@@ -76,5 +76,9 @@
   "lowestPrice": "最低価格更新通知",
   "cancel": "キャンセル",
   "remove": "削除",
-  "numberOfGames": "ゲーム数"
+  "numberOfGames": "ゲーム数",
+  "digitalEditionPrice": "デジタルエディション価格",
+  "bestPrice": "最安値",
+  "currentPrice": "現在の価格",
+  "price": "価格"
 }
