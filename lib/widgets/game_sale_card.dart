@@ -1,12 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:game_sale/constants/game_genre.dart';
 import 'package:game_sale/constants/game_platform.dart';
-import 'package:game_sale/generated/l10n.dart';
+import 'package:game_sale/models/chart.dart';
 import 'package:game_sale/models/game.dart';
+import 'package:game_sale/models/sale_history.dart';
 import 'package:game_sale/pages/game/game_info_page.dart';
+import 'package:game_sale/utils/util.dart';
 import 'package:game_sale/widgets/platform_tag.dart';
-import 'package:intl/intl.dart';
+import 'package:game_sale/widgets/sale_price_text.dart';
+
+import 'discount_chip.dart';
 
 /// ゲームセール用のカードを作成
 class GameSaleCard extends StatelessWidget {
@@ -25,13 +31,33 @@ class GameSaleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        showLoaderDialog(context);
+        final saleHistory =
+            await getSaleHistory(game.id!, game.releaseDate, game.basePrice);
+
+        final minPrice =
+            saleHistory.reduce((a, b) => a.price < b.price ? a : b).price;
+
+        final chartDate = [
+          charts.Series<Chart, DateTime>(
+            id: 'Sale',
+            colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+            domainFn: (Chart chart, _) => chart.time,
+            measureFn: (Chart chart, _) => chart.price,
+            data: saleHistory,
+          )
+        ];
+        Navigator.pop(context);
+
         Navigator.push(
           context,
           MaterialPageRoute<bool>(
             builder: (BuildContext context) => GameInfoPage(
               game: game,
               favoriteFlag: favoriteFlag,
+              chartData: chartDate,
+              minPrice: minPrice,
             ),
           ),
         );
@@ -101,67 +127,14 @@ class GameSaleCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Expanded(
-                              child: RichText(
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: NumberFormat.simpleCurrency(
-                                              locale: 'ja')
-                                          .format(game.salePrice),
-                                      style: const TextStyle(
-                                          fontSize: 12.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.red),
-                                    ),
-                                    WidgetSpan(
-                                      child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 4.0),
-                                        child: Text(
-                                          NumberFormat.simpleCurrency(
-                                                  locale: 'ja')
-                                              .format(game.basePrice),
-                                          style: const TextStyle(
-                                            fontSize: 9.0,
-                                            color: Colors.grey,
-                                            decoration:
-                                                TextDecoration.lineThrough,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                              child: SalePriceText(
+                                salePrice: game.salePrice,
+                                basePrice: game.basePrice,
                               ),
                             ),
-                            Chip(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
-                              backgroundColor: Colors.red,
-                              materialTapTargetSize:
-                                  MaterialTapTargetSize.shrinkWrap,
-                              label: RichText(
-                                textAlign: TextAlign.center,
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: '-${game.discountPercent}%',
-                                      style: const TextStyle(
-                                        fontSize: 13.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    const TextSpan(text: '\n'),
-                                    TextSpan(
-                                      text: S.of(context).daysLeft(
-                                          DateTime.parse(game.discountedUntil)
-                                              .difference(DateTime.now())
-                                              .inDays),
-                                      style: const TextStyle(fontSize: 8.0),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                            DiscountChip(
+                              discountPercent: game.discountPercent,
+                              discountedUntil: game.discountedUntil,
                             ),
                           ],
                         ),
@@ -175,5 +148,58 @@ class GameSaleCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<List<Chart>> getSaleHistory(
+      String gameId, String releaseDate, int basePrice) async {
+    final snapshots = await FirebaseFirestore.instance
+        .collection('games')
+        .doc(gameId)
+        .collection('saleHistory')
+        .orderBy('createdAt')
+        .withConverter<SaleHistory>(
+          fromFirestore: (snapshot, _) =>
+              SaleHistory.fromDocumentSnapshot(snapshot),
+          toFirestore: (obj, _) => obj.toJson(),
+        )
+        .get();
+
+    final saleHistory = snapshots.docs.map((doc) => doc.data()).toList();
+
+    String? maxDate;
+    switch (saleHistory.length) {
+      case 0:
+        maxDate = null;
+        break;
+      case 1:
+        maxDate = saleHistory.elementAt(0).saleEnd;
+        break;
+      default:
+        saleHistory
+            .reduce((a, b) =>
+                DateTime.parse(a.saleEnd).isAfter(DateTime.parse(b.saleEnd))
+                    ? a
+                    : b)
+            .saleEnd;
+        break;
+    }
+
+    final List<Chart> chartList = [];
+    chartList.add(Chart(DateTime.parse(releaseDate), basePrice));
+    for (var element in saleHistory) {
+      chartList.add(Chart(
+          DateTime.parse(element.saleStart).add(const Duration(days: 1) * -1),
+          element.basePrice));
+      chartList
+          .add(Chart(DateTime.parse(element.saleStart), element.salePrice));
+      chartList.add(Chart(DateTime.parse(element.saleEnd), element.salePrice));
+      chartList.add(Chart(
+          DateTime.parse(element.saleEnd).add(const Duration(days: 1)),
+          element.basePrice));
+    }
+    if (maxDate == null || !DateTime.parse(maxDate).isAfter(DateTime.now())) {
+      chartList.add(Chart(DateTime.now(), basePrice));
+    }
+    return chartList;
   }
 }

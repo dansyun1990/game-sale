@@ -37,12 +37,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "authenticationFailed": MessageLookupByLibrary.simpleMessage(
             "The password is incorrect or the email cannot be recognized."),
         "basicInfo": MessageLookupByLibrary.simpleMessage("Basic info"),
+        "bestPrice": MessageLookupByLibrary.simpleMessage("Best price"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "comingSoon": MessageLookupByLibrary.simpleMessage("Coming soon"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "createUserFailed":
             MessageLookupByLibrary.simpleMessage("Failed to create a user."),
+        "currentPrice": MessageLookupByLibrary.simpleMessage("Current price"),
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),
         "darkDescription":
             MessageLookupByLibrary.simpleMessage("Dark theme based on black"),
@@ -51,6 +53,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "deals": MessageLookupByLibrary.simpleMessage("Deals"),
         "desc": MessageLookupByLibrary.simpleMessage("Description"),
         "developer": MessageLookupByLibrary.simpleMessage("Developer"),
+        "digitalEditionPrice":
+            MessageLookupByLibrary.simpleMessage("Digital edition price"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
             "The account already exists for that email."),
@@ -95,6 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordUppercase": MessageLookupByLibrary.simpleMessage(
             "Should contain at least one uppercase"),
         "platform": MessageLookupByLibrary.simpleMessage("Platform"),
+        "price": MessageLookupByLibrary.simpleMessage("Price"),
         "priceFluctuation":
             MessageLookupByLibrary.simpleMessage("Notify price fluctuations"),
         "priceUndecided":

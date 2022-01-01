@@ -36,10 +36,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "authenticationFailed":
             MessageLookupByLibrary.simpleMessage("邮箱或密码错误。"),
         "basicInfo": MessageLookupByLibrary.simpleMessage("基本信息"),
+        "bestPrice": MessageLookupByLibrary.simpleMessage("最低价"),
         "cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "comingSoon": MessageLookupByLibrary.simpleMessage("即将发售"),
         "confirmPassword": MessageLookupByLibrary.simpleMessage("确认密码"),
         "createUserFailed": MessageLookupByLibrary.simpleMessage("创建用户失败。"),
+        "currentPrice": MessageLookupByLibrary.simpleMessage("当前价格"),
         "dark": MessageLookupByLibrary.simpleMessage("深色"),
         "darkDescription": MessageLookupByLibrary.simpleMessage("以黑色为主调的深色主题"),
         "daysLeft": m0,
@@ -47,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "deals": MessageLookupByLibrary.simpleMessage("折扣"),
         "desc": MessageLookupByLibrary.simpleMessage("简介"),
         "developer": MessageLookupByLibrary.simpleMessage("开发商"),
+        "digitalEditionPrice": MessageLookupByLibrary.simpleMessage("数字版价格"),
         "email": MessageLookupByLibrary.simpleMessage("邮箱"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage("该邮箱已经被注册。"),
         "favorite": MessageLookupByLibrary.simpleMessage("收藏"),
@@ -80,6 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordUppercase":
             MessageLookupByLibrary.simpleMessage("至少得包含1个大写字母"),
         "platform": MessageLookupByLibrary.simpleMessage("平台"),
+        "price": MessageLookupByLibrary.simpleMessage("价格"),
         "priceFluctuation": MessageLookupByLibrary.simpleMessage("价格变动通知"),
         "priceUndecided": MessageLookupByLibrary.simpleMessage("价格未定"),
         "publisher": MessageLookupByLibrary.simpleMessage("发行商"),

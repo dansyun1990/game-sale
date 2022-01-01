@@ -76,5 +76,9 @@
   "lowestPrice": "Notify lowest price",
   "cancel": "Cancel",
   "remove": "Remove",
-  "numberOfGames": "Number of games"
+  "numberOfGames": "Number of games",
+  "digitalEditionPrice": "Digital edition price",
+  "bestPrice": "Best price",
+  "currentPrice": "Current price",
+  "price": "Price"
 }
