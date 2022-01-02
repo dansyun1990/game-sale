@@ -86,7 +86,7 @@ class _SaleHistoryChartState extends State<SaleHistoryChart> {
     _measures?.forEach((String? series, num value) {
       children.add(
         Text(S.of(context).price +
-            ':' +
+            ' : ' +
             NumberFormat.simpleCurrency(locale: 'ja').format(value)),
       );
     });

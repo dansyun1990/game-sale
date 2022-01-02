@@ -6,7 +6,6 @@ import 'package:game_sale/providers/auth_provider.dart';
 import 'package:game_sale/providers/favorite_provider.dart';
 import 'package:game_sale/screens/home.dart';
 import 'package:game_sale/widgets/favorite_card.dart';
-import 'package:game_sale/widgets/sign_in_button.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// 気に入り一覧ページを作成
@@ -26,11 +25,12 @@ class FavoritePage extends HookConsumerWidget {
         leading: BackButton(
           onPressed: () {
             Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => const Home(),
-                ),
-                (_) => false);
+              context,
+              MaterialPageRoute(
+                builder: (_) => const Home(),
+              ),
+              (_) => false,
+            );
             // ログインした場合のみ、お気に入りProviderをリフレッシュ
             if (FirebaseAuth.instance.currentUser != null) {
               ref.refresh(favoriteProvider);
@@ -39,7 +39,7 @@ class FavoritePage extends HookConsumerWidget {
         ),
       ),
       body: ref.watch(authProvider).user == null
-          ? const Center(child: SignInButton())
+          ? Center(child: Text(S.of(context).signInMessage))
           : Center(
               child: AnimatedList(
                   key: listKey,

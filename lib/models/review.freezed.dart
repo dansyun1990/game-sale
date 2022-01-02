@@ -27,6 +27,10 @@ class _$ReviewTearOff {
       required String userName,
       required String content,
       required List<String> like,
+      required double rating,
+      int? difficulty,
+      int? progress,
+      int? clearTime,
       @TimestampConverter() required DateTime createdAt}) {
     return _Review(
       id: id,
@@ -34,6 +38,10 @@ class _$ReviewTearOff {
       userName: userName,
       content: content,
       like: like,
+      rating: rating,
+      difficulty: difficulty,
+      progress: progress,
+      clearTime: clearTime,
       createdAt: createdAt,
     );
   }
@@ -53,6 +61,10 @@ mixin _$Review {
   String get userName => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   List<String> get like => throw _privateConstructorUsedError;
+  double get rating => throw _privateConstructorUsedError;
+  int? get difficulty => throw _privateConstructorUsedError;
+  int? get progress => throw _privateConstructorUsedError;
+  int? get clearTime => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime get createdAt => throw _privateConstructorUsedError;
 
@@ -71,6 +83,10 @@ abstract class $ReviewCopyWith<$Res> {
       String userName,
       String content,
       List<String> like,
+      double rating,
+      int? difficulty,
+      int? progress,
+      int? clearTime,
       @TimestampConverter() DateTime createdAt});
 }
 
@@ -89,6 +105,10 @@ class _$ReviewCopyWithImpl<$Res> implements $ReviewCopyWith<$Res> {
     Object? userName = freezed,
     Object? content = freezed,
     Object? like = freezed,
+    Object? rating = freezed,
+    Object? difficulty = freezed,
+    Object? progress = freezed,
+    Object? clearTime = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
@@ -112,6 +132,22 @@ class _$ReviewCopyWithImpl<$Res> implements $ReviewCopyWith<$Res> {
           ? _value.like
           : like // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      rating: rating == freezed
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double,
+      difficulty: difficulty == freezed
+          ? _value.difficulty
+          : difficulty // ignore: cast_nullable_to_non_nullable
+              as int?,
+      progress: progress == freezed
+          ? _value.progress
+          : progress // ignore: cast_nullable_to_non_nullable
+              as int?,
+      clearTime: clearTime == freezed
+          ? _value.clearTime
+          : clearTime // ignore: cast_nullable_to_non_nullable
+              as int?,
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -131,6 +167,10 @@ abstract class _$ReviewCopyWith<$Res> implements $ReviewCopyWith<$Res> {
       String userName,
       String content,
       List<String> like,
+      double rating,
+      int? difficulty,
+      int? progress,
+      int? clearTime,
       @TimestampConverter() DateTime createdAt});
 }
 
@@ -150,6 +190,10 @@ class __$ReviewCopyWithImpl<$Res> extends _$ReviewCopyWithImpl<$Res>
     Object? userName = freezed,
     Object? content = freezed,
     Object? like = freezed,
+    Object? rating = freezed,
+    Object? difficulty = freezed,
+    Object? progress = freezed,
+    Object? clearTime = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_Review(
@@ -173,6 +217,22 @@ class __$ReviewCopyWithImpl<$Res> extends _$ReviewCopyWithImpl<$Res>
           ? _value.like
           : like // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      rating: rating == freezed
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double,
+      difficulty: difficulty == freezed
+          ? _value.difficulty
+          : difficulty // ignore: cast_nullable_to_non_nullable
+              as int?,
+      progress: progress == freezed
+          ? _value.progress
+          : progress // ignore: cast_nullable_to_non_nullable
+              as int?,
+      clearTime: clearTime == freezed
+          ? _value.clearTime
+          : clearTime // ignore: cast_nullable_to_non_nullable
+              as int?,
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -190,6 +250,10 @@ class _$_Review implements _Review {
       required this.userName,
       required this.content,
       required this.like,
+      required this.rating,
+      this.difficulty,
+      this.progress,
+      this.clearTime,
       @TimestampConverter() required this.createdAt});
 
   factory _$_Review.fromJson(Map<String, dynamic> json) =>
@@ -206,12 +270,20 @@ class _$_Review implements _Review {
   @override
   final List<String> like;
   @override
+  final double rating;
+  @override
+  final int? difficulty;
+  @override
+  final int? progress;
+  @override
+  final int? clearTime;
+  @override
   @TimestampConverter()
   final DateTime createdAt;
 
   @override
   String toString() {
-    return 'Review(id: $id, userId: $userId, userName: $userName, content: $content, like: $like, createdAt: $createdAt)';
+    return 'Review(id: $id, userId: $userId, userName: $userName, content: $content, like: $like, rating: $rating, difficulty: $difficulty, progress: $progress, clearTime: $clearTime, createdAt: $createdAt)';
   }
 
   @override
@@ -224,6 +296,11 @@ class _$_Review implements _Review {
             const DeepCollectionEquality().equals(other.userName, userName) &&
             const DeepCollectionEquality().equals(other.content, content) &&
             const DeepCollectionEquality().equals(other.like, like) &&
+            const DeepCollectionEquality().equals(other.rating, rating) &&
+            const DeepCollectionEquality()
+                .equals(other.difficulty, difficulty) &&
+            const DeepCollectionEquality().equals(other.progress, progress) &&
+            const DeepCollectionEquality().equals(other.clearTime, clearTime) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt));
   }
 
@@ -235,6 +312,10 @@ class _$_Review implements _Review {
       const DeepCollectionEquality().hash(userName),
       const DeepCollectionEquality().hash(content),
       const DeepCollectionEquality().hash(like),
+      const DeepCollectionEquality().hash(rating),
+      const DeepCollectionEquality().hash(difficulty),
+      const DeepCollectionEquality().hash(progress),
+      const DeepCollectionEquality().hash(clearTime),
       const DeepCollectionEquality().hash(createdAt));
 
   @JsonKey(ignore: true)
@@ -255,6 +336,10 @@ abstract class _Review implements Review {
       required String userName,
       required String content,
       required List<String> like,
+      required double rating,
+      int? difficulty,
+      int? progress,
+      int? clearTime,
       @TimestampConverter() required DateTime createdAt}) = _$_Review;
 
   factory _Review.fromJson(Map<String, dynamic> json) = _$_Review.fromJson;
@@ -269,6 +354,14 @@ abstract class _Review implements Review {
   String get content;
   @override
   List<String> get like;
+  @override
+  double get rating;
+  @override
+  int? get difficulty;
+  @override
+  int? get progress;
+  @override
+  int? get clearTime;
   @override
   @TimestampConverter()
   DateTime get createdAt;

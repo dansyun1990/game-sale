@@ -7,13 +7,12 @@ import 'package:game_sale/models/game.dart';
 /// お気に入り用リポジトリ
 class FavoriteRepository {
   final _firebaseFirestore = FirebaseFirestore.instance;
-  final _uid = FirebaseAuth.instance.currentUser!.uid;
 
   /// ログインユーザのお気に入り一覧を取得
   Future<QuerySnapshot<Favorite>> getFavorites() async {
     return await _firebaseFirestore
         .collection('users')
-        .doc(_uid)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('favorites')
         .withConverter<Favorite>(
           fromFirestore: (snapshot, _) =>
@@ -39,7 +38,7 @@ class FavoriteRepository {
   Future<void> addFavorite(String gameId) async {
     await _firebaseFirestore
         .collection('users')
-        .doc(_uid)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('favorites')
         .doc(gameId)
         .set({
@@ -53,7 +52,7 @@ class FavoriteRepository {
   Future<void> deleteFavorite(String gameId) async {
     await _firebaseFirestore
         .collection('users')
-        .doc(_uid)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('favorites')
         .doc(gameId)
         .delete();
@@ -63,11 +62,29 @@ class FavoriteRepository {
   Future<void> updateNotification(String gameId, int notificationType) async {
     await _firebaseFirestore
         .collection('users')
-        .doc(_uid)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('favorites')
         .doc(gameId)
         .update({
       'notificationType': notificationType,
     });
+  }
+
+  Future<bool?> checkFavorite(String? uid, String gameId) async {
+    if (uid == null) {
+      return null;
+    }
+    var snapshots = await _firebaseFirestore
+        .collection('users')
+        .doc(uid)
+        .collection('favorites')
+        .where('id', isEqualTo: gameId)
+        .get();
+
+    if (snapshots.size == 0) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
