@@ -4,34 +4,10 @@ import 'package:game_sale/constants/game_platform.dart';
 import 'package:game_sale/models/release_games.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-/// ゲームリリース全部一覧保持のProvider
-final releaseAllProvider =
-    StateNotifierProvider<ReleaseGamesStateNotifier, ReleaseGames>(
-  (ref) => ReleaseGamesStateNotifier(null),
-);
-
-/// ゲームリリースPS4一覧保持のProvider
-final releasePS4Provider =
-    StateNotifierProvider<ReleaseGamesStateNotifier, ReleaseGames>(
-  (ref) => ReleaseGamesStateNotifier(GamePlatform.ps4.key),
-);
-
-/// ゲームリリースPS5一覧保持のProvider
-final releasePS5Provider =
-    StateNotifierProvider<ReleaseGamesStateNotifier, ReleaseGames>(
-  (ref) => ReleaseGamesStateNotifier(GamePlatform.ps5.key),
-);
-
-/// ゲームリリースSwitch一覧保持のProvider
-final releaseSwitchProvider =
-    StateNotifierProvider<ReleaseGamesStateNotifier, ReleaseGames>(
-  (ref) => ReleaseGamesStateNotifier(GamePlatform.nintendoSwitch.key),
-);
-
-/// ゲームリリースSteam一覧保持のProvider
-final releaseSteamProvider =
-    StateNotifierProvider<ReleaseGamesStateNotifier, ReleaseGames>(
-  (ref) => ReleaseGamesStateNotifier(GamePlatform.steam.key),
+/// ゲームリリース一覧保持のProvider
+final releaseProvider = StateNotifierProvider.family<ReleaseGamesStateNotifier,
+    ReleaseGames, GamePlatform>(
+  (ref, platform) => ReleaseGamesStateNotifier(platform.key),
 );
 
 /// ゲームリリース一覧保持・検索を行うStateNotifier
