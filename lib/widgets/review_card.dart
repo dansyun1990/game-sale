@@ -1,11 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:game_sale/constants/game_clear_time.dart';
+import 'package:game_sale/constants/game_difficulty.dart';
+import 'package:game_sale/constants/game_progress.dart';
+import 'package:game_sale/generated/l10n.dart';
 import 'package:game_sale/models/review.dart';
 import 'package:game_sale/pages/game/game_review_detail_page.dart';
 import 'package:game_sale/repositories/like_repository.dart';
+import 'package:game_sale/widgets/sign_in_dialog.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+
+import 'card_tag.dart';
 
 class ReviewCard extends HookConsumerWidget {
   ReviewCard({
@@ -65,13 +72,26 @@ class ReviewCard extends HookConsumerWidget {
               !isDetail
                   ? HookConsumer(builder: (context, ref, child) {
                       final like = useState(review.like.length);
-                      final userId = FirebaseAuth.instance.currentUser!.uid;
-                      final liked = useState(review.like.contains(userId));
+                      final userId = FirebaseAuth.instance.currentUser?.uid;
+                      final liked = userId == null
+                          ? useState(false)
+                          : useState(review.like.contains(userId));
                       return Row(
                         children: [
                           InkWell(
                             borderRadius: BorderRadius.circular(25.0),
                             onTap: () async {
+                              if (userId == null) {
+                                showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (_) {
+                                    return const SignInDialog();
+                                  },
+                                );
+                                return;
+                              }
+
                               if (liked.value) {
                                 like.value = like.value - 1;
                                 liked.value = false;
@@ -138,6 +158,53 @@ class ReviewCard extends HookConsumerWidget {
             ),
           ),
         ),
+        Row(children: [
+          review.difficulty != null
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                  child: CardTag(
+                    text: S.of(context).difficulty +
+                        ':' +
+                        GameDifficulty.values
+                            .firstWhere((difficulty) =>
+                                difficulty.key == review.difficulty)
+                            .value,
+                    backgroundColor: Colors.grey[300]!,
+                    textColor: Colors.black54,
+                  ),
+                )
+              : Container(),
+          review.progress != null
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                  child: CardTag(
+                    text: S.of(context).progress +
+                        ':' +
+                        GameProgress.values
+                            .firstWhere(
+                                (progress) => progress.key == review.progress)
+                            .value,
+                    backgroundColor: Colors.grey[300]!,
+                    textColor: Colors.black54,
+                  ),
+                )
+              : Container(),
+          review.clearTime != null
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                  child: CardTag(
+                    text: S.of(context).clearTime +
+                        ':' +
+                        GameClearTime.values
+                            .firstWhere((clearTime) =>
+                                clearTime.key == review.clearTime)
+                            .value,
+                    backgroundColor: Colors.grey[300]!,
+                    textColor: Colors.black54,
+                  ),
+                )
+              : Container(),
+        ]),
         const Divider(),
       ],
     );

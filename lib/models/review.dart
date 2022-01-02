@@ -13,6 +13,10 @@ class Review with _$Review {
     required String userName,
     required String content,
     required List<String> like,
+    required double rating,
+    int? difficulty,
+    int? progress,
+    int? clearTime,
     @TimestampConverter() required DateTime createdAt,
   }) = _Review;
 

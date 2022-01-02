@@ -1,25 +1,26 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:game_sale/constants/game_genre.dart';
 import 'package:game_sale/constants/game_platform.dart';
 import 'package:game_sale/constants/game_rating.dart';
-import 'package:game_sale/constants/notification_type.dart';
 import 'package:game_sale/generated/l10n.dart';
 import 'package:game_sale/models/chart.dart';
 import 'package:game_sale/models/game.dart';
 import 'package:game_sale/models/review.dart';
-import 'package:game_sale/models/user.dart';
 import 'package:game_sale/pages/settings/favorite_page.dart';
 import 'package:game_sale/providers/auth_provider.dart';
+import 'package:game_sale/providers/check_favorite_provider.dart';
 import 'package:game_sale/providers/favorite_provider.dart';
+import 'package:game_sale/repositories/game_info_repository.dart';
+import 'package:game_sale/utils/util.dart';
 import 'package:game_sale/widgets/card_tag.dart';
 import 'package:game_sale/widgets/discount_chip.dart';
 import 'package:game_sale/widgets/platform_tag.dart';
 import 'package:game_sale/widgets/review_card.dart';
 import 'package:game_sale/widgets/sale_history_chart.dart';
 import 'package:game_sale/widgets/sale_price_text.dart';
+import 'package:game_sale/widgets/sign_in_dialog.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -29,7 +30,7 @@ import 'game_review_page.dart';
 
 /// ゲーム情報ページを作成
 class GameInfoPage extends HookConsumerWidget {
-  const GameInfoPage({
+  GameInfoPage({
     Key? key,
     required this.game,
     this.favoriteFlag = false,
@@ -44,8 +45,14 @@ class GameInfoPage extends HookConsumerWidget {
   final int minPrice;
   final List<Review> reviews;
 
+  final gameInfoRepository = GameInfoRepository();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref
+        .watch(checkFavoriteProvider.notifier)
+        .checkFavorite(ref.watch(authProvider).user?.uid, game.id!);
+
     return WillPopScope(
       onWillPop: () async {
         if (favoriteFlag) {
@@ -94,81 +101,43 @@ class GameInfoPage extends HookConsumerWidget {
             mainAxisSize: MainAxisSize.max,
             children: [
               HookConsumer(builder: (context, ref, child) {
-                return FutureBuilder(
-                  future: checkFavorite(
-                      ref.watch(authProvider).user?.uid, game.id!),
-                  builder:
-                      (BuildContext context, AsyncSnapshot<bool?> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
-                    }
-
-                    if (snapshot.hasData) {
-                      return IconButton(
-                        icon: !snapshot.data!
-                            ? const Icon(Icons.favorite_outline)
-                            : const Icon(Icons.favorite),
-                        color: Theme.of(context).primaryColor,
-                        onPressed: () async {
-                          if (!snapshot.data!) {
-                            if (favoriteFlag) {
-                              await ref
-                                  .read(favoriteProvider.notifier)
-                                  .addFavorite(game.id!);
-                            } else {
-                              await addFavorite(
-                                  ref.watch(authProvider).user?.uid, game.id!);
-                            }
-                            ref.refresh(authProvider);
-                          } else {
-                            if (favoriteFlag) {
-                              await ref
-                                  .read(favoriteProvider.notifier)
-                                  .deleteFavorite(game.id!);
-                            } else {
-                              await deleteFavorite(
-                                  ref.watch(authProvider).user?.uid, game.id!);
-                            }
-                            ref.refresh(authProvider);
-                          }
+                final favorite = ref.watch(checkFavoriteProvider);
+                return IconButton(
+                  icon: favorite == true
+                      ? const Icon(Icons.favorite)
+                      : const Icon(Icons.favorite_outline),
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? Theme.of(context).primaryColor
+                      : Colors.white,
+                  onPressed: () async {
+                    if (favorite == null) {
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (_) {
+                          return const SignInDialog();
                         },
                       );
+                      return;
                     }
-                    return IconButton(
-                      icon: const Icon(Icons.favorite_outline),
-                      color: Theme.of(context).primaryColor,
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (_) {
-                            return AlertDialog(
-                              content: Text(
-                                'サインインしてくだい。',
-                                style: TextStyle(fontSize: 15.0),
-                              ),
-                              actions: [
-                                TextButton(
-                                  child: Text("キャンセル"),
-                                  onPressed: () => Navigator.pop(context),
-                                ),
-                                TextButton(
-                                  child: Text("サインイン"),
-                                  onPressed: () => print('OK'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                    );
+                    if (!favorite) {
+                      ref
+                          .watch(checkFavoriteProvider.notifier)
+                          .addFavorite(favoriteFlag, game.id!);
+                    } else {
+                      ref
+                          .watch(checkFavoriteProvider.notifier)
+                          .deleteFavorite(favoriteFlag, game.id!);
+                    }
                   },
                 );
               }),
               const Spacer(),
               IconButton(
                 icon: const Icon(Icons.share_outlined),
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).brightness == Brightness.light
+                    ? Theme.of(context).primaryColor
+                    : Colors.white,
                 onPressed: () {},
               ),
             ],
@@ -177,65 +146,45 @@ class GameInfoPage extends HookConsumerWidget {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton.extended(
           icon: const Icon(Icons.add_comment),
+          label: Text('レビュー'),
           onPressed: () async {
+            if (ref.read(authProvider).user == null) {
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (_) {
+                  return const SignInDialog();
+                },
+              );
+              return;
+            }
+
+            showLoaderDialog(context);
+
+            final snapshots = await gameInfoRepository.getReview(
+                game.id!, ref.read(authProvider).user!.uid);
+
+            final review = snapshots.size == 0
+                ? null
+                : snapshots.docs.map((doc) => doc.data()).toList();
+
+            Navigator.pop(context);
+
             Navigator.push(
               context,
               MaterialPageRoute<bool>(
                 builder: (BuildContext context) => GameReviewPage(
+                  gameId: game.id!,
                   name: game.name,
                   subName: game.subName,
+                  review: review?.elementAt(0),
                 ),
               ),
             );
           },
-          label: Text('レビュー'),
         ),
       ),
     );
-  }
-
-  Future<bool?> checkFavorite(String? uid, String gameId) async {
-    if (uid == null) {
-      return null;
-    }
-    var snapshots = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(uid)
-        .collection('favorites')
-        .where('id', isEqualTo: gameId)
-        .withConverter<User>(
-          fromFirestore: (snapshot, _) => User.fromDocumentSnapshot(snapshot),
-          toFirestore: (obj, _) => obj.toJson(),
-        )
-        .get();
-
-    if (snapshots.size == 0) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  Future<void> addFavorite(String? uid, String gameId) async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(uid)
-        .collection('favorites')
-        .doc(gameId)
-        .set({
-      'id': gameId,
-      'notificationType': NotificationType.off.key,
-      'createdAt': Timestamp.now(),
-    });
-  }
-
-  Future<void> deleteFavorite(String? uid, String gameId) async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(uid)
-        .collection('favorites')
-        .doc(gameId)
-        .delete();
   }
 }
 
@@ -254,7 +203,7 @@ class GameInfo extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 120,
+              height: 120.0,
               child: ListView.builder(
                 itemCount: game.screenshot.length,
                 scrollDirection: Axis.horizontal,
@@ -272,7 +221,7 @@ class GameInfo extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 10.0),
             GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -301,7 +250,7 @@ class GameInfo extends StatelessWidget {
                         child: Text(
                           game.name,
                           style: const TextStyle(
-                            fontSize: 18,
+                            fontSize: 18.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -316,7 +265,7 @@ class GameInfo extends StatelessWidget {
                   Text(
                     game.subName,
                     style: const TextStyle(
-                      fontSize: 12,
+                      fontSize: 12.0,
                     ),
                   ),
                   Row(
@@ -392,7 +341,7 @@ class GameInfo extends StatelessWidget {
                     game.desc,
                     maxLines: 5,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 14),
+                    style: const TextStyle(fontSize: 14.0),
                   )
                 ],
               ),
@@ -462,7 +411,7 @@ class GamePrice extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
                 decoration: BoxDecoration(
                   color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.0),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -500,7 +449,7 @@ class GamePrice extends StatelessWidget {
   }
 }
 
-class GameReview extends StatelessWidget {
+class GameReview extends HookConsumerWidget {
   const GameReview({Key? key, required this.gameId, required this.reviews})
       : super(key: key);
 
@@ -508,7 +457,7 @@ class GameReview extends StatelessWidget {
   final List<Review> reviews;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Card(
       elevation: 0.0,
       child: Padding(

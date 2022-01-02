@@ -859,6 +859,216 @@ class S {
       args: [],
     );
   }
+
+  /// `New reviews`
+  String get newReviews {
+    return Intl.message(
+      'New reviews',
+      name: 'newReviews',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See all reviews`
+  String get seeAllReviews {
+    return Intl.message(
+      'See all reviews',
+      name: 'seeAllReviews',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Game review`
+  String get gameReview {
+    return Intl.message(
+      'Game review',
+      name: 'gameReview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Game difficulty`
+  String get gameDifficulty {
+    return Intl.message(
+      'Game difficulty',
+      name: 'gameDifficulty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Game progress`
+  String get gameProgress {
+    return Intl.message(
+      'Game progress',
+      name: 'gameProgress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Difficulty`
+  String get difficulty {
+    return Intl.message(
+      'Difficulty',
+      name: 'difficulty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Progress`
+  String get progress {
+    return Intl.message(
+      'Progress',
+      name: 'progress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear time`
+  String get clearTime {
+    return Intl.message(
+      'Clear time',
+      name: 'clearTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trial`
+  String get trial {
+    return Intl.message(
+      'Trial',
+      name: 'trial',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ongoing`
+  String get ongoing {
+    return Intl.message(
+      'Ongoing',
+      name: 'ongoing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear`
+  String get clear {
+    return Intl.message(
+      'Clear',
+      name: 'clear',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Complete`
+  String get complete {
+    return Intl.message(
+      'Complete',
+      name: 'complete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Beginner`
+  String get beginner {
+    return Intl.message(
+      'Beginner',
+      name: 'beginner',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Easy`
+  String get easy {
+    return Intl.message(
+      'Easy',
+      name: 'easy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Normal`
+  String get normal {
+    return Intl.message(
+      'Normal',
+      name: 'normal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hard`
+  String get hard {
+    return Intl.message(
+      'Hard',
+      name: 'hard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maniac`
+  String get maniac {
+    return Intl.message(
+      'Maniac',
+      name: 'maniac',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `hours`
+  String get hours {
+    return Intl.message(
+      'hours',
+      name: 'hours',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please write a review`
+  String get reviewMessage {
+    return Intl.message(
+      'Please write a review',
+      name: 'reviewMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `10 characters or more`
+  String get reviewHelper {
+    return Intl.message(
+      '10 characters or more',
+      name: 'reviewHelper',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter at least 10 characters`
+  String get reviewLength {
+    return Intl.message(
+      'Please enter at least 10 characters',
+      name: 'reviewLength',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

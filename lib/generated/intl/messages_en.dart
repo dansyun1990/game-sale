@@ -37,9 +37,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "authenticationFailed": MessageLookupByLibrary.simpleMessage(
             "The password is incorrect or the email cannot be recognized."),
         "basicInfo": MessageLookupByLibrary.simpleMessage("Basic info"),
+        "beginner": MessageLookupByLibrary.simpleMessage("Beginner"),
         "bestPrice": MessageLookupByLibrary.simpleMessage("Best price"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "clear": MessageLookupByLibrary.simpleMessage("Clear"),
+        "clearTime": MessageLookupByLibrary.simpleMessage("Clear time"),
         "comingSoon": MessageLookupByLibrary.simpleMessage("Coming soon"),
+        "complete": MessageLookupByLibrary.simpleMessage("Complete"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "createUserFailed":
@@ -53,8 +57,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "deals": MessageLookupByLibrary.simpleMessage("Deals"),
         "desc": MessageLookupByLibrary.simpleMessage("Description"),
         "developer": MessageLookupByLibrary.simpleMessage("Developer"),
+        "difficulty": MessageLookupByLibrary.simpleMessage("Difficulty"),
         "digitalEditionPrice":
             MessageLookupByLibrary.simpleMessage("Digital edition price"),
+        "easy": MessageLookupByLibrary.simpleMessage("Easy"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
             "The account already exists for that email."),
@@ -66,8 +72,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "ftg": MessageLookupByLibrary.simpleMessage("Fighting"),
         "game": MessageLookupByLibrary.simpleMessage("Game"),
         "gameDetail": MessageLookupByLibrary.simpleMessage("Game detail"),
+        "gameDifficulty":
+            MessageLookupByLibrary.simpleMessage("Game difficulty"),
         "gameInfo": MessageLookupByLibrary.simpleMessage("Game info"),
+        "gameProgress": MessageLookupByLibrary.simpleMessage("Game progress"),
+        "gameReview": MessageLookupByLibrary.simpleMessage("Game review"),
         "genre": MessageLookupByLibrary.simpleMessage("Genre"),
+        "hard": MessageLookupByLibrary.simpleMessage("Hard"),
+        "hours": MessageLookupByLibrary.simpleMessage("hours"),
         "invalidEmail":
             MessageLookupByLibrary.simpleMessage("Invalid email address"),
         "languages": MessageLookupByLibrary.simpleMessage("Languages"),
@@ -76,13 +88,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Light theme based on white"),
         "lowestPrice":
             MessageLookupByLibrary.simpleMessage("Notify lowest price"),
+        "maniac": MessageLookupByLibrary.simpleMessage("Maniac"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
+        "newReviews": MessageLookupByLibrary.simpleMessage("New reviews"),
         "noResults":
             MessageLookupByLibrary.simpleMessage("No matching results found."),
+        "normal": MessageLookupByLibrary.simpleMessage("Normal"),
         "notificationOff":
             MessageLookupByLibrary.simpleMessage("Notification off"),
         "numberOfGames":
             MessageLookupByLibrary.simpleMessage("Number of games"),
+        "ongoing": MessageLookupByLibrary.simpleMessage("Ongoing"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordDigit": MessageLookupByLibrary.simpleMessage(
             "Should contain at least one digit"),
@@ -104,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Notify price fluctuations"),
         "priceUndecided":
             MessageLookupByLibrary.simpleMessage("Price undecided"),
+        "progress": MessageLookupByLibrary.simpleMessage("Progress"),
         "publisher": MessageLookupByLibrary.simpleMessage("Publisher"),
         "pzl": MessageLookupByLibrary.simpleMessage("Puzzle"),
         "rcg": MessageLookupByLibrary.simpleMessage("Racing"),
@@ -116,12 +133,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "remove": MessageLookupByLibrary.simpleMessage("Remove"),
         "required": m2,
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset password"),
+        "reviewHelper":
+            MessageLookupByLibrary.simpleMessage("10 characters or more"),
+        "reviewLength": MessageLookupByLibrary.simpleMessage(
+            "Please enter at least 10 characters"),
+        "reviewMessage":
+            MessageLookupByLibrary.simpleMessage("Please write a review"),
         "rpg": MessageLookupByLibrary.simpleMessage("Role-playing"),
         "salePriceSort":
             MessageLookupByLibrary.simpleMessage("Sort by sale price"),
         "searchFilter": MessageLookupByLibrary.simpleMessage("Search filter"),
         "searchMessage": MessageLookupByLibrary.simpleMessage(
             "Search by full name of the game"),
+        "seeAllReviews":
+            MessageLookupByLibrary.simpleMessage("See all reviews"),
         "sendingFailed":
             MessageLookupByLibrary.simpleMessage("Failed to send email."),
         "sendingSuccess": MessageLookupByLibrary.simpleMessage(
@@ -138,6 +163,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "systemDescription":
             MessageLookupByLibrary.simpleMessage("Follow the system settings"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
+        "trial": MessageLookupByLibrary.simpleMessage("Trial"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("User not found."),
         "voice": MessageLookupByLibrary.simpleMessage("Voice")
       };

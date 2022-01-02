@@ -16,10 +16,9 @@ class SortButton extends HookConsumerWidget {
       itemBuilder: (_) => List<PopupMenuEntry<GameSort>>.generate(
           GameSort.values.length, (index) {
         final sort = GameSort.values.elementAt(index);
-        final checked = sort.key == ref.watch(sortSelectorProvider).key;
         return CheckedPopupMenuItem(
           padding: EdgeInsets.zero,
-          checked: checked,
+          checked: sort == ref.watch(sortSelectorProvider.state).state,
           value: sort,
           child: Row(
             children: [
