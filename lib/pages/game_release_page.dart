@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:game_sale/constants/game_platform.dart';
 import 'package:game_sale/generated/l10n.dart';
 import 'package:game_sale/models/release_game.dart';
-import 'package:game_sale/models/release_games.dart';
 import 'package:game_sale/providers/release_provider.dart';
 import 'package:game_sale/widgets/game_release_card.dart';
 import 'package:grouped_list/sliver_grouped_list.dart';
@@ -32,31 +31,7 @@ class GameReleasePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ReleaseGamesStateNotifier releaseGamesStateNotifier;
-    final ReleaseGames releaseGames;
-    // ゲームプラットフォーム別で検索結果を保持
-    switch (platform) {
-      case GamePlatform.all:
-        releaseGamesStateNotifier = ref.read(releaseAllProvider.notifier);
-        releaseGames = ref.watch(releaseAllProvider);
-        break;
-      case GamePlatform.ps4:
-        releaseGamesStateNotifier = ref.read(releasePS4Provider.notifier);
-        releaseGames = ref.watch(releasePS4Provider);
-        break;
-      case GamePlatform.ps5:
-        releaseGamesStateNotifier = ref.read(releasePS5Provider.notifier);
-        releaseGames = ref.watch(releasePS5Provider);
-        break;
-      case GamePlatform.nintendoSwitch:
-        releaseGamesStateNotifier = ref.read(releaseSwitchProvider.notifier);
-        releaseGames = ref.watch(releaseSwitchProvider);
-        break;
-      case GamePlatform.steam:
-        releaseGamesStateNotifier = ref.read(releaseSteamProvider.notifier);
-        releaseGames = ref.watch(releaseSteamProvider);
-        break;
-    }
+    final releaseGames = ref.watch(releaseProvider(platform));
 
     return NotificationListener<ScrollEndNotification>(
       onNotification: (ScrollNotification scrollInfo) {
@@ -64,26 +39,14 @@ class GameReleasePage extends HookConsumerWidget {
             scrollInfo.metrics.pixels / scrollInfo.metrics.maxScrollExtent;
         // 画面の80%にスクロールした場合、遅延読み込み
         if (!releaseGames.isLoading && scrollProportion > _threshold) {
-          releaseGamesStateNotifier.fetchPosts(platform.key);
+          ref
+              .watch(releaseProvider(platform).notifier)
+              .fetchPosts(platform.key);
         }
         return true;
       },
       child: RefreshIndicator(
-        onRefresh: () async {
-          // プラットフォーム別でPull-to-refresh
-          switch (platform) {
-            case GamePlatform.all:
-              return await ref.refresh(releaseAllProvider);
-            case GamePlatform.ps4:
-              return await ref.refresh(releasePS4Provider);
-            case GamePlatform.ps5:
-              return await ref.refresh(releasePS5Provider);
-            case GamePlatform.nintendoSwitch:
-              return await ref.refresh(releaseSwitchProvider);
-            case GamePlatform.steam:
-              return await ref.refresh(releaseSteamProvider);
-          }
-        },
+        onRefresh: () async => await ref.refresh(releaseProvider(platform)),
         child: CustomScrollView(
           slivers: [
             SliverPersistentHeader(
