@@ -43,6 +43,7 @@ class GameSalePage extends HookConsumerWidget {
                   ),
                 ),
               ),
+              pinned: true,
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
@@ -85,14 +86,17 @@ class StickyBarDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return child;
+    return Container(
+      color: Theme.of(context).canvasColor,
+      child: child,
+    );
   }
 
   @override
   double get maxExtent => 48.0;
 
   @override
-  double get minExtent => 0;
+  double get minExtent => 48.0;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
