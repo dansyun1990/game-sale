@@ -40,6 +40,19 @@ FlutterとFirebaseを勉強するために、一般的なアプリの基本機�
   - テーマの変更（ライト、ダーク）
   - 言語の変更（日本語、英語、中国語）
 
+## アプリイメージ
+| ゲームセール情報一覧 | 発売予定ゲーム一覧 | フィルター |
+| ------ | ------ | ------ |
+| <img src="https://user-images.githubusercontent.com/33895415/147942189-fde6e71c-d3ed-42ad-942d-300dfb7485bf.png" width="300"> | <img src="https://user-images.githubusercontent.com/33895415/147942540-12635397-23a9-472e-a538-38fd964531aa.png" width="300"> | <img src="https://user-images.githubusercontent.com/33895415/147944118-feb2a815-4138-4554-ae2d-5f544d1c322e.png" width="300"> |
+
+| アカウント設定 | ゲーム情報 | ゲーム詳細 |
+| ------ | ------ | ------ |
+| <img src="https://user-images.githubusercontent.com/33895415/147942614-e5900858-455c-4770-91eb-be00a9bef754.png" width="300"> | <img src="https://user-images.githubusercontent.com/33895415/147944349-fa73430f-3aba-4b56-b4e9-47c4b5007cc6.png" width="300"> | <img src="https://user-images.githubusercontent.com/33895415/147944366-91b23813-9bf9-4473-b045-bd21cdaa80b2.png" width="300"> |
+
+| ゲームセール履歴 | レビュー一覧 | レビュー |
+| ------ | ------ | ------ |
+| <img src="https://user-images.githubusercontent.com/33895415/147944536-eb3b768d-0e87-42d3-8fdc-cf31270086c3.png" width="300"> | <img src="https://user-images.githubusercontent.com/33895415/147944546-149914bf-f5b0-4586-a4e0-bc4bb5a3c494.png" width="300"> | <img src="https://user-images.githubusercontent.com/33895415/147944553-df2c34c0-48e9-42b4-ab3d-a074d26a7d58.png" width="300"> |
+
 ## 主な技術
 | 名称 | 技術・パッケージ |
 | ------ | ------ |
