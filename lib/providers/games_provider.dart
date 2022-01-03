@@ -126,6 +126,7 @@ class GamesStateNotifier extends StateNotifier<Games> {
     }
 
     if (snapshots.size == 0) {
+      state = state.copyWith(hasMore: false);
       return;
     }
 

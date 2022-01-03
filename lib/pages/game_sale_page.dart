@@ -15,7 +15,7 @@ class GameSalePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final gamesState = ref.watch(gamesProvider);
 
-    return NotificationListener<ScrollNotification>(
+    return NotificationListener<ScrollEndNotification>(
       onNotification: (ScrollNotification scrollInfo) {
         // 画面一番したまでスクロールした場合、遅延読み込み
         if (!gamesState.isLoading &&
