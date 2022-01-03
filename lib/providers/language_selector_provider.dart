@@ -15,12 +15,12 @@ class LanguageSelectorStateNotifier extends StateNotifier<Languages> {
   }
 
   /// ストレージ保存のインスタンスを作成
-  final localStorage = LocalStorage();
+  final _localStorage = LocalStorage();
 
   /// 選択された言語の保存があれば取得して反映
   void init() async {
     final languageIndex =
-        await localStorage.getStorage(LocalStorageKey.language);
+        await _localStorage.getStorage(LocalStorageKey.language);
     if (languageIndex != null) {
       state = Languages.values
           .firstWhere((languages) => languages.index == languageIndex);
@@ -29,7 +29,7 @@ class LanguageSelectorStateNotifier extends StateNotifier<Languages> {
 
   /// 言語の変更を行い、選択された[languages]をストレージに保存
   void change(Languages languages) async {
-    await localStorage.setStorage(LocalStorageKey.language, languages.index);
+    await _localStorage.setStorage(LocalStorageKey.language, languages.index);
     state = languages;
   }
 }

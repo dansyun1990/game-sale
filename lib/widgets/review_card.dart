@@ -8,12 +8,13 @@ import 'package:game_sale/generated/l10n.dart';
 import 'package:game_sale/models/review.dart';
 import 'package:game_sale/pages/game/game_review_detail_page.dart';
 import 'package:game_sale/repositories/like_repository.dart';
-import 'package:game_sale/widgets/sign_in_dialog.dart';
+import 'package:game_sale/utils/util.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import 'card_tag.dart';
 
+/// レビュー用のカードを作成
 class ReviewCard extends HookConsumerWidget {
   ReviewCard({
     Key? key,
@@ -22,11 +23,17 @@ class ReviewCard extends HookConsumerWidget {
     this.isDetail = false,
   }) : super(key: key);
 
+  /// ゲームID
   final String gameId;
+
+  /// レビュー情報
   final Review review;
+
+  /// レビュー詳細フラグ
   final bool isDetail;
 
-  final likeRepository = LikeRepository();
+  /// いいねボタン用リポジトリインスタンス生成
+  final _likeRepository = LikeRepository();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -82,25 +89,19 @@ class ReviewCard extends HookConsumerWidget {
                             borderRadius: BorderRadius.circular(25.0),
                             onTap: () async {
                               if (userId == null) {
-                                showDialog(
-                                  context: context,
-                                  barrierDismissible: false,
-                                  builder: (_) {
-                                    return const SignInDialog();
-                                  },
-                                );
+                                showSignInDialog(context);
                                 return;
                               }
 
                               if (liked.value) {
                                 like.value = like.value - 1;
                                 liked.value = false;
-                                await likeRepository.deleteLike(
+                                await _likeRepository.deleteLike(
                                     gameId, review.id!, userId);
                               } else {
                                 like.value = like.value + 1;
                                 liked.value = true;
-                                await likeRepository.addLike(
+                                await _likeRepository.addLike(
                                     gameId, review.id!, userId);
                               }
                             },

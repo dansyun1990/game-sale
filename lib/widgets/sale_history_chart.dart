@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:game_sale/generated/l10n.dart';
 import 'package:intl/intl.dart';
 
+/// セール履歴用のグラフを作成
 class SaleHistoryChart extends StatefulWidget {
   const SaleHistoryChart({Key? key, required this.seriesList})
       : super(key: key);
 
+  /// グラフ表示用のセール履歴データ
   final List<charts.Series<dynamic, DateTime>> seriesList;
 
   @override

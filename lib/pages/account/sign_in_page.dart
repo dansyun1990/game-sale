@@ -5,18 +5,20 @@ import 'package:game_sale/constants/password_type.dart';
 import 'package:game_sale/generated/l10n.dart';
 import 'package:game_sale/pages/account/forgot_password_page.dart';
 import 'package:game_sale/pages/account/register_page.dart';
+import 'package:game_sale/providers/auth_provider.dart';
 import 'package:game_sale/utils/util.dart';
 import 'package:game_sale/widgets/email_form_field.dart';
 import 'package:game_sale/widgets/password_form_field.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// サインインページを作成
-class SignInPage extends HookWidget {
+class SignInPage extends HookConsumerWidget {
   SignInPage({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
 
@@ -81,6 +83,7 @@ class SignInPage extends HookWidget {
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           showLoaderDialog(context);
+                          ref.read(userNameProvider.notifier).state = null;
                           await _signIn(
                               context: context,
                               email: emailController.text,
@@ -109,14 +112,10 @@ class SignInPage extends HookWidget {
         email: email,
         password: password,
       );
+      showMessageSnackBar(context, S.of(context).signInSuccess);
       Navigator.pop(context);
     } on FirebaseAuthException {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(S.of(context).authenticationFailed),
-          duration: const Duration(seconds: 3),
-        ),
-      );
+      showMessageSnackBar(context, S.of(context).authenticationFailed);
     }
   }
 }

@@ -8,7 +8,7 @@ import 'package:game_sale/models/game.dart';
 class FavoriteRepository {
   final _firebaseFirestore = FirebaseFirestore.instance;
 
-  /// ログインユーザのお気に入り一覧を取得
+  /// サインインユーザのお気に入り一覧を取得
   Future<QuerySnapshot<Favorite>> getFavorites() async {
     return await _firebaseFirestore
         .collection('users')
@@ -70,11 +70,12 @@ class FavoriteRepository {
     });
   }
 
+  /// サインインユーザ[uid]のお気に入りに追加済みかどうかを確認
   Future<bool?> checkFavorite(String? uid, String gameId) async {
     if (uid == null) {
       return null;
     }
-    var snapshots = await _firebaseFirestore
+    final snapshots = await _firebaseFirestore
         .collection('users')
         .doc(uid)
         .collection('favorites')

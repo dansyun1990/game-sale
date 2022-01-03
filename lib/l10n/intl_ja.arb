@@ -8,8 +8,11 @@
   "signOut": "サインアウト",
   "accountConfirm": "アカウントがありません?",
   "signUp": "サインアップ",
+  "signInSuccess": "サインイン成功しました。",
+  "signOutSuccess": "サインアウト成功しました。",
   "forgotPassword": "パスワードを忘れた?",
   "forgotPasswordMessage": "メールアドレスを入力すると、パスワードリセットのリンクが送信されます",
+  "userName": "ユーザ名",
   "email": "メールアドレス",
   "password": "パスワード",
   "confirmPassword": "パスワード確認",
@@ -100,6 +103,13 @@
   "maniac": "地獄",
   "hours": "時間",
   "reviewMessage": "レビューを記入してください",
+  "rateMessage": "ゲームを評価してください。",
   "reviewHelper": "10文字以上",
-  "reviewLength": "10文字以上を記入してください。"
+  "reviewLength": "10文字以上を記入してください。",
+  "review": "レビュー",
+  "reviewDetail": "レビュー詳細",
+  "reviewAdd": "レビューが作成されました。",
+  "reviewUpdate": "レビューが更新されました。",
+  "reviewDelete": "レビューが削除されました。",
+  "noReview": "レビューがまだありません。"
 }

@@ -130,6 +130,26 @@ class S {
     );
   }
 
+  /// `Sign-in successful.`
+  String get signInSuccess {
+    return Intl.message(
+      'Sign-in successful.',
+      name: 'signInSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign-out successful.`
+  String get signOutSuccess {
+    return Intl.message(
+      'Sign-out successful.',
+      name: 'signOutSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Forgot password?`
   String get forgotPassword {
     return Intl.message(
@@ -145,6 +165,16 @@ class S {
     return Intl.message(
       'Provide your email and we will send you a link to reset your password',
       name: 'forgotPasswordMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User name`
+  String get userName {
+    return Intl.message(
+      'User name',
+      name: 'userName',
       desc: '',
       args: [],
     );
@@ -1050,6 +1080,16 @@ class S {
     );
   }
 
+  /// `Please rate the game.`
+  String get rateMessage {
+    return Intl.message(
+      'Please rate the game.',
+      name: 'rateMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `10 characters or more`
   String get reviewHelper {
     return Intl.message(
@@ -1065,6 +1105,66 @@ class S {
     return Intl.message(
       'Please enter at least 10 characters',
       name: 'reviewLength',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Review`
+  String get review {
+    return Intl.message(
+      'Review',
+      name: 'review',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Review detail`
+  String get reviewDetail {
+    return Intl.message(
+      'Review detail',
+      name: 'reviewDetail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The review has been created.`
+  String get reviewAdd {
+    return Intl.message(
+      'The review has been created.',
+      name: 'reviewAdd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The review has been updated.`
+  String get reviewUpdate {
+    return Intl.message(
+      'The review has been updated.',
+      name: 'reviewUpdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The review has been deleted.`
+  String get reviewDelete {
+    return Intl.message(
+      'The review has been deleted.',
+      name: 'reviewDelete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No reviews yet`
+  String get noReview {
+    return Intl.message(
+      'No reviews yet',
+      name: 'noReview',
       desc: '',
       args: [],
     );

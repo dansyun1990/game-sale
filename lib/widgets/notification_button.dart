@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:game_sale/constants/notification_type.dart';
 import 'package:game_sale/generated/l10n.dart';
 import 'package:game_sale/models/favorite.dart';
-import 'package:game_sale/providers/favorite_provider.dart';
+import 'package:game_sale/providers/favorites_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// お気に入り用の通知ボタンを作成
@@ -38,7 +38,7 @@ class NotificationButton extends HookConsumerWidget {
                     onChanged: (NotificationType? newNotification) async {
                       notificationType.value = newNotification!.key;
                       await ref
-                          .read(favoriteProvider.notifier)
+                          .read(favoritesProvider.notifier)
                           .updateNotification(favorite.id, newNotification.key);
                       Navigator.of(context).pop();
                     },

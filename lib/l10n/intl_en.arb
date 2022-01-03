@@ -8,8 +8,11 @@
   "signOut": "Sign out",
   "accountConfirm": "Don't have an account?",
   "signUp": "Sign up",
+  "signInSuccess": "Sign-in successful.",
+  "signOutSuccess": "Sign-out successful.",
   "forgotPassword": "Forgot password?",
   "forgotPasswordMessage": "Provide your email and we will send you a link to reset your password",
+  "userName": "User name",
   "email": "Email",
   "password": "Password",
   "confirmPassword": "Confirm password",
@@ -100,6 +103,13 @@
   "maniac": "Maniac",
   "hours": "hours",
   "reviewMessage": "Please write a review",
+  "rateMessage": "Please rate the game.",
   "reviewHelper": "10 characters or more",
-  "reviewLength": "Please enter at least 10 characters"
+  "reviewLength": "Please enter at least 10 characters",
+  "review": "Review",
+  "reviewDetail": "Review detail",
+  "reviewAdd": "The review has been created.",
+  "reviewUpdate": "The review has been updated.",
+  "reviewDelete": "The review has been deleted.",
+  "noReview": "No reviews yet"
 }

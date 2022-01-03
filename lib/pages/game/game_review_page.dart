@@ -11,6 +11,7 @@ import 'package:game_sale/repositories/review_repository.dart';
 import 'package:game_sale/utils/util.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+/// ゲームレビューページを作成
 class GameReviewPage extends HookConsumerWidget {
   GameReviewPage({
     Key? key,
@@ -20,12 +21,21 @@ class GameReviewPage extends HookConsumerWidget {
     this.review,
   }) : super(key: key);
 
+  /// ゲームID
   final String gameId;
+
+  /// ゲーム名称
   final String name;
+
+  /// ゲーム副名称
   final String subName;
+
+  /// レビュー情報
   final Review? review;
 
-  final reviewRepository = ReviewRepository();
+  /// ゲームレビュー用リポジトリインスタンス生成
+  final _reviewRepository = ReviewRepository();
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -57,17 +67,12 @@ class GameReviewPage extends HookConsumerWidget {
                   icon: const Icon(Icons.delete_forever),
                   onPressed: () async {
                     showLoaderDialog(context);
-                    await reviewRepository.deleteReview(
+                    await _reviewRepository.deleteReview(
                       gameId: gameId,
                       reviewId: review!.id!,
                     );
                     Navigator.pop(context);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('レビューを削除しました。'),
-                        duration: const Duration(seconds: 3),
-                      ),
-                    );
+                    showMessageSnackBar(context, S.of(context).reviewDelete);
                     Navigator.pop(context);
                   },
                 )
@@ -84,7 +89,7 @@ class GameReviewPage extends HookConsumerWidget {
                   final progress =
                       ref.watch(progressSelectorProvider.notifier).state;
 
-                  await reviewRepository.addReview(
+                  await _reviewRepository.addReview(
                     gameId: gameId,
                     reviewId: review?.id,
                     rating: rating,
@@ -105,29 +110,14 @@ class GameReviewPage extends HookConsumerWidget {
                   Navigator.pop(context);
 
                   if (review == null) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('レビューを投稿しました。'),
-                        duration: const Duration(seconds: 3),
-                      ),
-                    );
+                    showMessageSnackBar(context, S.of(context).reviewAdd);
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('レビューを更新しました。'),
-                        duration: const Duration(seconds: 3),
-                      ),
-                    );
+                    showMessageSnackBar(context, S.of(context).reviewUpdate);
                   }
 
                   Navigator.pop(context);
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('点数をつけてください'),
-                      duration: const Duration(seconds: 3),
-                    ),
-                  );
+                  showMessageSnackBar(context, S.of(context).rateMessage);
                 }
               }
             },
@@ -164,8 +154,8 @@ class GameReviewPage extends HookConsumerWidget {
                         const Divider(),
                         HookConsumer(builder: (context, ref, child) {
                           return RatingBar.builder(
-                            initialRating: review?.rating ?? 0,
-                            minRating: 0,
+                            initialRating: review?.rating ?? 0.0,
+                            minRating: 0.0,
                             direction: Axis.horizontal,
                             allowHalfRating: true,
                             itemCount: 5,
@@ -213,11 +203,11 @@ class GameReviewPage extends HookConsumerWidget {
                 ),
               ),
               const SizedBox(height: 16.0),
-              const Difficulty(),
+              const _Difficulty(),
               const SizedBox(height: 8.0),
-              const Progress(),
+              const _Progress(),
               const SizedBox(height: 8.0),
-              const ClearTime(),
+              const _ClearTime(),
             ],
           ),
         ),
@@ -226,8 +216,8 @@ class GameReviewPage extends HookConsumerWidget {
   }
 }
 
-class Difficulty extends HookConsumerWidget {
-  const Difficulty({Key? key}) : super(key: key);
+class _Difficulty extends HookConsumerWidget {
+  const _Difficulty({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -281,8 +271,8 @@ class Difficulty extends HookConsumerWidget {
   }
 }
 
-class Progress extends HookConsumerWidget {
-  const Progress({Key? key}) : super(key: key);
+class _Progress extends HookConsumerWidget {
+  const _Progress({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -335,8 +325,8 @@ class Progress extends HookConsumerWidget {
   }
 }
 
-class ClearTime extends HookConsumerWidget {
-  const ClearTime({Key? key}) : super(key: key);
+class _ClearTime extends HookConsumerWidget {
+  const _ClearTime({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

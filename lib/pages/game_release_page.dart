@@ -92,7 +92,7 @@ class GameReleasePage extends HookConsumerWidget {
                       Text(
                         groupByValue,
                         style: const TextStyle(
-                          fontSize: 16,
+                          fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

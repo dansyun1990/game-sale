@@ -66,27 +66,12 @@ class ForgotPasswordPage extends HookWidget {
   }) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(S.of(context).sendingSuccess),
-          duration: const Duration(seconds: 3),
-        ),
-      );
+      showMessageSnackBar(context, S.of(context).sendingSuccess);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(S.of(context).userNotFound),
-            duration: const Duration(seconds: 3),
-          ),
-        );
+        showMessageSnackBar(context, S.of(context).userNotFound);
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(S.of(context).sendingFailed),
-            duration: const Duration(seconds: 3),
-          ),
-        );
+        showMessageSnackBar(context, S.of(context).sendingFailed);
       }
     }
   }

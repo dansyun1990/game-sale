@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:game_sale/generated/l10n.dart';
 import 'package:game_sale/models/favorites.dart';
 import 'package:game_sale/providers/auth_provider.dart';
-import 'package:game_sale/providers/favorite_provider.dart';
+import 'package:game_sale/providers/favorites_provider.dart';
 import 'package:game_sale/screens/home.dart';
 import 'package:game_sale/widgets/favorite_card.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-/// 気に入り一覧ページを作成
+/// お気に入り一覧ページを作成
 class FavoritePage extends HookConsumerWidget {
   const FavoritePage({Key? key, this.favorites}) : super(key: key);
 
+  /// お気に入り情報
   final Favorites? favorites;
 
   @override
@@ -31,9 +32,9 @@ class FavoritePage extends HookConsumerWidget {
               ),
               (_) => false,
             );
-            // ログインした場合のみ、お気に入りProviderをリフレッシュ
+            // サインインした場合のみ、お気に入りProviderをリフレッシュ
             if (FirebaseAuth.instance.currentUser != null) {
-              ref.refresh(favoriteProvider);
+              ref.refresh(favoritesProvider);
             }
           },
         ),
@@ -47,7 +48,7 @@ class FavoritePage extends HookConsumerWidget {
                   itemBuilder: (context, index, animation) {
                     final game = favorites!.games.elementAt(index);
                     final favorite = ref
-                        .read(favoriteProvider)
+                        .read(favoritesProvider)
                         .favorites
                         .firstWhere((element) => element.id == game.id,
                             orElse: () => favorites!.favorites.first);
@@ -61,12 +62,12 @@ class FavoritePage extends HookConsumerWidget {
                         favorites!.games
                             .removeWhere((element) => element.id == game.id);
                         ref
-                            .read(favoriteProvider)
+                            .read(favoritesProvider)
                             .favorites
                             .removeWhere((element) => element.id == game.id);
 
                         await ref
-                            .read(favoriteProvider.notifier)
+                            .read(favoritesProvider.notifier)
                             .deleteFavorite(game.id!);
 
                         listKey.currentState?.removeItem(

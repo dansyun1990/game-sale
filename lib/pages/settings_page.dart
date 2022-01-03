@@ -8,7 +8,7 @@ import 'package:game_sale/pages/settings/favorite_page.dart';
 import 'package:game_sale/pages/settings/language_page.dart';
 import 'package:game_sale/pages/settings/theme_page.dart';
 import 'package:game_sale/providers/auth_provider.dart';
-import 'package:game_sale/providers/favorite_provider.dart';
+import 'package:game_sale/providers/favorites_provider.dart';
 import 'package:game_sale/providers/language_selector_provider.dart';
 import 'package:game_sale/providers/theme_selector_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -22,9 +22,9 @@ class SettingsPage extends HookConsumerWidget {
     final auth = ref.watch(authProvider);
     Favorites? favorites;
 
-    // ログインした場合のみ、お気に入り一覧を取得
+    // サインインした場合のみ、お気に入り一覧を取得
     if (auth.user != null) {
-      favorites = ref.watch(favoriteProvider);
+      favorites = ref.watch(favoritesProvider);
     }
 
     return SettingsList(

@@ -62,7 +62,9 @@ class GameDetailPage extends StatelessWidget {
               Text(
                 S.of(context).basicInfo,
                 style: const TextStyle(
-                    fontSize: 16.0, fontWeight: FontWeight.bold),
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 8.0),
               DetailLabel(
@@ -109,7 +111,9 @@ class GameDetailPage extends StatelessWidget {
               Text(
                 S.of(context).desc,
                 style: const TextStyle(
-                    fontSize: 16.0, fontWeight: FontWeight.bold),
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 8.0),
               Text(
