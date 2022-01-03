@@ -8,8 +8,11 @@
   "signOut": "登出",
   "accountConfirm": "没有账号?",
   "signUp": "注册",
+  "signInSuccess": "已经成功登录。",
+  "signOutSuccess": "已经成功登出。",
   "forgotPassword": "忘记密码?",
   "forgotPasswordMessage": "提供您的电子邮件，我们将向您发送一个链接以重置您的密码",
+  "userName": "用户名",
   "email": "邮箱",
   "password": "密码",
   "confirmPassword": "确认密码",
@@ -100,6 +103,13 @@
   "maniac": "地狱",
   "hours": "小时",
   "reviewMessage": "请分享下体验",
+  "rateMessage": "请评价游戏。",
   "reviewHelper": "10个字以上",
-  "reviewLength": "至少请输入10个字以上"
+  "reviewLength": "至少请输入10个字以上",
+  "review": "评论",
+  "reviewDetail": "评论详情",
+  "reviewAdd": "评论被创建了。",
+  "reviewUpdate": "评论被更新了。",
+  "reviewDelete": "评论被删除了。",
+  "noReview": "还没有评论。"
 }

@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+/// ゲームレビュー用リポジトリ
 class ReviewRepository {
   final _firebaseFirestore = FirebaseFirestore.instance;
-  final _uid = FirebaseAuth.instance.currentUser!.uid;
 
+  /// 選択された[gameId]にレビューを追加
   Future<void> addReview({
     required String gameId,
     String? reviewId,
@@ -14,14 +15,15 @@ class ReviewRepository {
     int? progress,
     int? clearTime,
   }) async {
+    final currentUser = FirebaseAuth.instance.currentUser!;
     await _firebaseFirestore
         .collection('games')
         .doc(gameId)
         .collection('reviews')
         .doc(reviewId)
         .set({
-      'userId': _uid,
-      'userName': _uid,
+      'userId': currentUser.uid,
+      'userName': currentUser.displayName,
       'like': [],
       'rating': rating,
       'content': content,
@@ -32,6 +34,7 @@ class ReviewRepository {
     });
   }
 
+  /// 選択された[gameId]からレビューを削除
   Future<void> deleteReview({
     required String gameId,
     required String reviewId,

@@ -10,8 +10,8 @@ import 'package:game_sale/models/game.dart';
 import 'package:game_sale/models/review.dart';
 import 'package:game_sale/pages/settings/favorite_page.dart';
 import 'package:game_sale/providers/auth_provider.dart';
-import 'package:game_sale/providers/check_favorite_provider.dart';
 import 'package:game_sale/providers/favorite_provider.dart';
+import 'package:game_sale/providers/favorites_provider.dart';
 import 'package:game_sale/repositories/game_info_repository.dart';
 import 'package:game_sale/utils/util.dart';
 import 'package:game_sale/widgets/card_tag.dart';
@@ -20,7 +20,6 @@ import 'package:game_sale/widgets/platform_tag.dart';
 import 'package:game_sale/widgets/review_card.dart';
 import 'package:game_sale/widgets/sale_history_chart.dart';
 import 'package:game_sale/widgets/sale_price_text.dart';
-import 'package:game_sale/widgets/sign_in_dialog.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -34,23 +33,33 @@ class GameInfoPage extends HookConsumerWidget {
     Key? key,
     required this.game,
     this.favoriteFlag = false,
-    required this.chartData,
     required this.minPrice,
+    required this.chartData,
     required this.reviews,
   }) : super(key: key);
 
+  /// ゲーム情報
   final Game game;
+
+  /// お気に入りから遷移した場合のフラグ
   final bool favoriteFlag;
-  final List<charts.Series<Chart, DateTime>> chartData;
+
+  /// ゲームの最安値
   final int minPrice;
+
+  /// グラフ表示用のセール履歴データ
+  final List<charts.Series<Chart, DateTime>> chartData;
+
+  /// レビュー情報
   final List<Review> reviews;
 
-  final gameInfoRepository = GameInfoRepository();
+  /// ゲーム情報用リポジトリインスタンス生成
+  final _gameInfoRepository = GameInfoRepository();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref
-        .watch(checkFavoriteProvider.notifier)
+        .watch(favoriteProvider.notifier)
         .checkFavorite(ref.watch(authProvider).user?.uid, game.id!);
 
     return WillPopScope(
@@ -60,7 +69,7 @@ class GameInfoPage extends HookConsumerWidget {
             context,
             MaterialPageRoute(
               builder: (_) => FavoritePage(
-                favorites: ref.read(favoriteProvider),
+                favorites: ref.read(favoritesProvider),
               ),
             ),
           );
@@ -76,32 +85,31 @@ class GameInfoPage extends HookConsumerWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              GameInfo(game: game),
+              _GameInfo(game: game),
               const SizedBox(height: 8.0),
-              GamePrice(
+              _GamePrice(
                 game: game,
                 minPrice: minPrice,
                 chartData: chartData,
               ),
               const SizedBox(height: 8.0),
-              GameReview(gameId: game.id!, reviews: reviews),
+              _GameReview(gameId: game.id!, reviews: reviews),
               const SizedBox(height: 32.0),
             ],
           ),
         ),
         bottomNavigationBar: BottomAppBar(
           notchMargin: 4.0,
-          shape: const AutomaticNotchedShape(
-            RoundedRectangleBorder(),
-            StadiumBorder(
-              side: BorderSide(),
+          shape: AutomaticNotchedShape(
+            const RoundedRectangleBorder(),
+            BeveledRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
             ),
           ),
           child: Row(
-            mainAxisSize: MainAxisSize.max,
             children: [
               HookConsumer(builder: (context, ref, child) {
-                final favorite = ref.watch(checkFavoriteProvider);
+                final favorite = ref.watch(favoriteProvider);
                 return IconButton(
                   icon: favorite == true
                       ? const Icon(Icons.favorite)
@@ -111,22 +119,16 @@ class GameInfoPage extends HookConsumerWidget {
                       : Colors.white,
                   onPressed: () async {
                     if (favorite == null) {
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (_) {
-                          return const SignInDialog();
-                        },
-                      );
+                      showSignInDialog(context);
                       return;
                     }
                     if (!favorite) {
                       ref
-                          .watch(checkFavoriteProvider.notifier)
+                          .watch(favoriteProvider.notifier)
                           .addFavorite(favoriteFlag, game.id!);
                     } else {
                       ref
-                          .watch(checkFavoriteProvider.notifier)
+                          .watch(favoriteProvider.notifier)
                           .deleteFavorite(favoriteFlag, game.id!);
                     }
                   },
@@ -145,23 +147,20 @@ class GameInfoPage extends HookConsumerWidget {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton.extended(
-          icon: const Icon(Icons.add_comment),
-          label: Text('レビュー'),
+          shape: BeveledRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          icon: const Icon(Icons.rate_review_sharp),
+          label: Text(S.of(context).review),
           onPressed: () async {
             if (ref.read(authProvider).user == null) {
-              showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (_) {
-                  return const SignInDialog();
-                },
-              );
+              showSignInDialog(context);
               return;
             }
 
             showLoaderDialog(context);
 
-            final snapshots = await gameInfoRepository.getReview(
+            final snapshots = await _gameInfoRepository.getReview(
                 game.id!, ref.read(authProvider).user!.uid);
 
             final review = snapshots.size == 0
@@ -188,9 +187,10 @@ class GameInfoPage extends HookConsumerWidget {
   }
 }
 
-class GameInfo extends StatelessWidget {
-  const GameInfo({Key? key, required this.game}) : super(key: key);
+class _GameInfo extends StatelessWidget {
+  const _GameInfo({Key? key, required this.game}) : super(key: key);
 
+  /// ゲーム情報
   final Game game;
 
   @override
@@ -257,8 +257,8 @@ class GameInfo extends StatelessWidget {
                       ),
                       PlatformTag(
                         platform: GamePlatform.values.firstWhere(
-                            (gamePlatform) =>
-                                gamePlatform.value == game.platform),
+                          (gamePlatform) => gamePlatform.value == game.platform,
+                        ),
                       ),
                     ],
                   ),
@@ -353,16 +353,21 @@ class GameInfo extends StatelessWidget {
   }
 }
 
-class GamePrice extends StatelessWidget {
-  const GamePrice({
+class _GamePrice extends StatelessWidget {
+  const _GamePrice({
     Key? key,
     required this.game,
     required this.minPrice,
     required this.chartData,
   }) : super(key: key);
 
+  /// ゲーム情報
   final Game game;
+
+  /// ゲームの最安値
   final int minPrice;
+
+  /// グラフ表示用のセール履歴データ
   final List<charts.Series<Chart, DateTime>> chartData;
 
   @override
@@ -449,15 +454,18 @@ class GamePrice extends StatelessWidget {
   }
 }
 
-class GameReview extends HookConsumerWidget {
-  const GameReview({Key? key, required this.gameId, required this.reviews})
+class _GameReview extends StatelessWidget {
+  const _GameReview({Key? key, required this.gameId, required this.reviews})
       : super(key: key);
 
+  /// ゲームID
   final String gameId;
+
+  /// レビュー情報
   final List<Review> reviews;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Card(
       elevation: 0.0,
       child: Padding(
@@ -511,10 +519,10 @@ class GameReview extends HookConsumerWidget {
                       ],
                     ),
                   )
-                : const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
+                : Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: Center(
-                      child: Text('レビューがまだありません。'),
+                      child: Text(S.of(context).noReview),
                     ),
                   ),
           ],

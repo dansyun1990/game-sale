@@ -93,6 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "newReviews": MessageLookupByLibrary.simpleMessage("New reviews"),
         "noResults":
             MessageLookupByLibrary.simpleMessage("No matching results found."),
+        "noReview": MessageLookupByLibrary.simpleMessage("No reviews yet"),
         "normal": MessageLookupByLibrary.simpleMessage("Normal"),
         "notificationOff":
             MessageLookupByLibrary.simpleMessage("Notification off"),
@@ -123,6 +124,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "progress": MessageLookupByLibrary.simpleMessage("Progress"),
         "publisher": MessageLookupByLibrary.simpleMessage("Publisher"),
         "pzl": MessageLookupByLibrary.simpleMessage("Puzzle"),
+        "rateMessage":
+            MessageLookupByLibrary.simpleMessage("Please rate the game."),
         "rcg": MessageLookupByLibrary.simpleMessage("Racing"),
         "release": MessageLookupByLibrary.simpleMessage("Coming soon"),
         "releaseDate": MessageLookupByLibrary.simpleMessage("Release"),
@@ -133,12 +136,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "remove": MessageLookupByLibrary.simpleMessage("Remove"),
         "required": m2,
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset password"),
+        "review": MessageLookupByLibrary.simpleMessage("Review"),
+        "reviewAdd": MessageLookupByLibrary.simpleMessage(
+            "The review has been created."),
+        "reviewDelete": MessageLookupByLibrary.simpleMessage(
+            "The review has been deleted."),
+        "reviewDetail": MessageLookupByLibrary.simpleMessage("Review detail"),
         "reviewHelper":
             MessageLookupByLibrary.simpleMessage("10 characters or more"),
         "reviewLength": MessageLookupByLibrary.simpleMessage(
             "Please enter at least 10 characters"),
         "reviewMessage":
             MessageLookupByLibrary.simpleMessage("Please write a review"),
+        "reviewUpdate": MessageLookupByLibrary.simpleMessage(
+            "The review has been updated."),
         "rpg": MessageLookupByLibrary.simpleMessage("Role-playing"),
         "salePriceSort":
             MessageLookupByLibrary.simpleMessage("Sort by sale price"),
@@ -154,7 +165,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign in"),
         "signInMessage": MessageLookupByLibrary.simpleMessage("Please sign in"),
+        "signInSuccess":
+            MessageLookupByLibrary.simpleMessage("Sign-in successful."),
         "signOut": MessageLookupByLibrary.simpleMessage("Sign out"),
+        "signOutSuccess":
+            MessageLookupByLibrary.simpleMessage("Sign-out successful."),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
         "slg": MessageLookupByLibrary.simpleMessage("Simulation"),
         "spg": MessageLookupByLibrary.simpleMessage("Sports"),
@@ -164,6 +179,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Follow the system settings"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "trial": MessageLookupByLibrary.simpleMessage("Trial"),
+        "userName": MessageLookupByLibrary.simpleMessage("User name"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("User not found."),
         "voice": MessageLookupByLibrary.simpleMessage("Voice")
       };

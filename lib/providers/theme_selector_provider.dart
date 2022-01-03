@@ -15,11 +15,12 @@ class ThemeSelectorStateNotifier extends StateNotifier<ThemeMode> {
   }
 
   /// ストレージ保存のインスタンスを作成
-  final localStorage = LocalStorage();
+  final _localStorage = LocalStorage();
 
   /// 選択されたテーマの保存があれば取得して反映
   void init() async {
-    final themeIndex = await localStorage.getStorage(LocalStorageKey.themeMode);
+    final themeIndex =
+        await _localStorage.getStorage(LocalStorageKey.themeMode);
     if (themeIndex != null) {
       state = ThemeMode.values.firstWhere(
         (themeMode) => themeMode.index == themeIndex,
@@ -30,7 +31,7 @@ class ThemeSelectorStateNotifier extends StateNotifier<ThemeMode> {
 
   /// テーマの変更を行い、選択された[themeMode]をストレージに保存
   void change(ThemeMode themeMode) async {
-    await localStorage.setStorage(LocalStorageKey.themeMode, themeMode.index);
+    await _localStorage.setStorage(LocalStorageKey.themeMode, themeMode.index);
     state = themeMode;
   }
 }

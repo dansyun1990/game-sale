@@ -25,7 +25,7 @@ class DetailLabel extends StatelessWidget {
               child: Text(
                 title,
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 14.0,
                   color: Colors.grey[500],
                 ),
               )),
@@ -33,7 +33,7 @@ class DetailLabel extends StatelessWidget {
             child: Text(
               text,
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 14.0,
                 color: Theme.of(context).brightness == Brightness.light
                     ? Colors.black54
                     : Colors.white60,

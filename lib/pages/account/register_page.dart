@@ -4,18 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:game_sale/constants/password_type.dart';
 import 'package:game_sale/generated/l10n.dart';
+import 'package:game_sale/providers/auth_provider.dart';
 import 'package:game_sale/utils/util.dart';
 import 'package:game_sale/widgets/email_form_field.dart';
 import 'package:game_sale/widgets/password_form_field.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// サインアップページを作成
-class RegisterPage extends HookWidget {
+class RegisterPage extends HookConsumerWidget {
   RegisterPage({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userNameController = useTextEditingController();
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
     final confirmPasswordController = useTextEditingController();
@@ -33,6 +36,22 @@ class RegisterPage extends HookWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                TextFormField(
+                  controller: userNameController,
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    labelText: S.of(context).userName,
+                    prefixIcon: const Icon(Icons.person),
+                  ),
+                  validator: (String? value) {
+                    if (value!.isEmpty) {
+                      return S.of(context).required(S.of(context).userName);
+                    }
+                    return null;
+                  },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                ),
+                const SizedBox(height: 16.0),
                 EmailFormField(controller: emailController),
                 const SizedBox(height: 16.0),
                 PasswordFormField(
@@ -61,8 +80,11 @@ class RegisterPage extends HookWidget {
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           showLoaderDialog(context);
+                          ref.read(userNameProvider.notifier).state =
+                              userNameController.text;
                           await _signUp(
                             context: context,
+                            userName: userNameController.text,
                             email: emailController.text,
                             password: passwordController.text,
                           );
@@ -82,6 +104,7 @@ class RegisterPage extends HookWidget {
 
   Future<void> _signUp({
     required BuildContext context,
+    required String userName,
     required String email,
     required String password,
   }) async {
@@ -92,28 +115,28 @@ class RegisterPage extends HookWidget {
       ))
           .user;
 
+      await user?.updateDisplayName(userName);
+      await user?.reload();
+
       await FirebaseFirestore.instance.collection('users').doc(user!.uid).set({
-        'userName': 'userName',
+        'userName': userName,
         'email': email,
         'createdAt': Timestamp.now(),
       });
+      showMessageSnackBar(context, S.of(context).signInSuccess);
       var count = 0;
       Navigator.popUntil(context, (_) => count++ >= 2);
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'email-already-in-use') {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(S.of(context).emailAlreadyInUse),
-            duration: const Duration(seconds: 3),
-          ),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(S.of(context).createUserFailed),
-            duration: const Duration(seconds: 3),
-          ),
-        );
+      switch (e.code) {
+        case 'email-already-in-use':
+          showMessageSnackBar(context, S.of(context).emailAlreadyInUse);
+          break;
+        case 'invalid-email':
+          showMessageSnackBar(context, S.of(context).invalidEmail);
+          break;
+        default:
+          showMessageSnackBar(context, S.of(context).createUserFailed);
+          break;
       }
     }
   }

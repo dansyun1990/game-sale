@@ -1,14 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:game_sale/constants/game_genre.dart';
 import 'package:game_sale/constants/game_platform.dart';
 import 'package:game_sale/models/chart.dart';
 import 'package:game_sale/models/game.dart';
 import 'package:game_sale/models/review.dart';
-import 'package:game_sale/models/sale_history.dart';
 import 'package:game_sale/pages/game/game_info_page.dart';
+import 'package:game_sale/repositories/game_info_repository.dart';
 import 'package:game_sale/utils/util.dart';
 import 'package:game_sale/widgets/platform_tag.dart';
 import 'package:game_sale/widgets/sale_price_text.dart';
@@ -17,7 +16,7 @@ import 'discount_chip.dart';
 
 /// ゲームセール用のカードを作成
 class GameSaleCard extends StatelessWidget {
-  const GameSaleCard({
+  GameSaleCard({
     Key? key,
     required this.game,
     this.favoriteFlag = false,
@@ -29,18 +28,21 @@ class GameSaleCard extends StatelessWidget {
   /// お気に入りから遷移した場合のフラグ
   final bool favoriteFlag;
 
+  /// ゲーム情報用リポジトリインスタンス生成
+  final _gameInfoRepository = GameInfoRepository();
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
         showLoaderDialog(context);
         final saleHistory =
-            await getSaleHistory(game.id!, game.releaseDate, game.basePrice);
+            await _getSaleHistory(game.id!, game.releaseDate, game.basePrice);
 
         final minPrice =
             saleHistory.reduce((a, b) => a.price < b.price ? a : b).price;
 
-        final reviews = await getReviews(game.id!);
+        final reviews = await _getReviews(game.id!);
 
         final chartDate = [
           charts.Series<Chart, DateTime>(
@@ -154,19 +156,12 @@ class GameSaleCard extends StatelessWidget {
     );
   }
 
-  Future<List<Chart>> getSaleHistory(
-      String gameId, String releaseDate, int basePrice) async {
-    final snapshots = await FirebaseFirestore.instance
-        .collection('games')
-        .doc(gameId)
-        .collection('saleHistory')
-        .orderBy('createdAt')
-        .withConverter<SaleHistory>(
-          fromFirestore: (snapshot, _) =>
-              SaleHistory.fromDocumentSnapshot(snapshot),
-          toFirestore: (obj, _) => obj.toJson(),
-        )
-        .get();
+  Future<List<Chart>> _getSaleHistory(
+    String gameId,
+    String releaseDate,
+    int basePrice,
+  ) async {
+    final snapshots = await _gameInfoRepository.getSaleHistory(gameId);
 
     final saleHistory = snapshots.docs.map((doc) => doc.data()).toList();
 
@@ -207,18 +202,8 @@ class GameSaleCard extends StatelessWidget {
     return chartList;
   }
 
-  Future<List<Review>> getReviews(String gameId) async {
-    final snapshots = await FirebaseFirestore.instance
-        .collection('games')
-        .doc(gameId)
-        .collection('reviews')
-        .limit(5)
-        .orderBy('createdAt', descending: true)
-        .withConverter<Review>(
-          fromFirestore: (snapshot, _) => Review.fromDocumentSnapshot(snapshot),
-          toFirestore: (obj, _) => obj.toJson(),
-        )
-        .get();
+  Future<List<Review>> _getReviews(String gameId) async {
+    final snapshots = await _gameInfoRepository.getReviews(gameId);
 
     return snapshots.docs.map((doc) => doc.data()).toList();
   }

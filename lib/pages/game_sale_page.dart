@@ -28,9 +28,7 @@ class GameSalePage extends HookConsumerWidget {
         return true;
       },
       child: RefreshIndicator(
-        onRefresh: () async {
-          return await ref.refresh(gamesProvider);
-        },
+        onRefresh: () async => await ref.refresh(gamesProvider),
         child: CustomScrollView(
           slivers: [
             SliverPersistentHeader(

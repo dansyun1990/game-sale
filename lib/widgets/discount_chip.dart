@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:game_sale/generated/l10n.dart';
 
+/// 割引用のチップを作成
 class DiscountChip extends StatelessWidget {
   const DiscountChip({
     Key? key,
@@ -8,7 +9,10 @@ class DiscountChip extends StatelessWidget {
     required this.discountedUntil,
   }) : super(key: key);
 
+  /// 割引率
   final int discountPercent;
+
+  /// 割引期限
   final String discountedUntil;
 
   @override

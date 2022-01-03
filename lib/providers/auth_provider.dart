@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+/// ユーザ名保持のProvider
+final userNameProvider = StateProvider<String?>((ref) => null);
+
 /// 認証状態保持のProvider
 final authProvider = StateNotifierProvider<AuthStateNotifier, AuthState>(
     (ref) => AuthStateNotifier());
